@@ -14,6 +14,8 @@ export default function App() {
   const [progressPercent, setProgressPercent] = useState(0);
   const [generationId, setGenerationId] = useState(null); // 🪄 Track current generation task
 
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
+
   const handleUpload = async () => {
     setIsLoading(true);
     setLoadingStage("🧃 Processing your file...");
@@ -35,12 +37,12 @@ export default function App() {
       }, 1200);
 
       // 🌟 Get a unique generation ID from backend
-      const idRes = await fetch("http://localhost:4000/generate-id");
+      const idRes = await fetch(`${API_BASE}/generate-id`);
       const { generation_id } = await idRes.json();
       setGenerationId(generation_id);
       formData.append("generation_id", generation_id);
 
-      const response = await fetch("http://localhost:4000/upload", {
+      const response = await fetch(`${API_BASE}/upload`, {
         method: "POST",
         body: formData,
       });
@@ -59,7 +61,7 @@ export default function App() {
       }
 
       const filenameParam = encodeURIComponent(files[0].name);
-      const docURL = `http://localhost:4000${result.htmlPath}?filename=${filenameParam}`;
+      const docURL = `${API_BASE}${result.htmlPath}?filename=${filenameParam}`;
       window.open(docURL, "_blank");
 
     } catch (err) {
@@ -75,7 +77,7 @@ export default function App() {
 
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:4000/generation-progress/${generationId}`);
+        const res = await fetch(`${API_BASE}/generation-progress/${generationId}`);
         const data = await res.json();
         const status = data.status;
 
@@ -246,7 +248,7 @@ export default function App() {
                 onClick={() => {
                   setIsLoading(false);
                   if (generationId) {
-                    fetch(`http://localhost:4000/cancel-generation/${generationId}`);
+                    fetch(`${API_BASE}/cancel-generation/${generationId}`);
                   }
                 }}
               >
