@@ -1025,6 +1025,19 @@ def parse_file_by_type(file_path, generation_id=None, status=None, flags=None):
     else:
         return None
 
+def remove_comments(text):
+    if not isinstance(text, str):
+        return text
+
+    # Remove all block comments
+    cleaned = re.sub(r'/\*.*?\*/', '', text, flags=re.DOTALL)
+
+    # Split into parts if it's a list of statements (e.g., CSS properties)
+    parts = [p.strip() for p in cleaned.split(';') if p.strip()]  # removes empty parts
+
+    # Rejoin only the valid non-empty parts with semicolons
+    return '; '.join(parts)
+
 def generate_html(parsed_data, output_path, hide_buttons=False):
     template_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "templates"))
     env = Environment(loader=FileSystemLoader(template_path))
@@ -1061,6 +1074,30 @@ def generate_html(parsed_data, output_path, hide_buttons=False):
             grouped_data["Classes"].extend(data.get("classes", []))
             grouped_data["IDs"].extend(data.get("ids", []))
             grouped_data["Media Queries"].extend(data.get("media", []))
+            
+        for group_name, group in grouped_data.items():
+            for item in group:
+                if "selector" in item:
+                    item["selector"] = remove_comments(item["selector"])
+                if "name" in item and item["name"]:
+                    item["name"] = remove_comments(item["name"])
+                if "description" in item:
+                    item["description"] = remove_comments(item["description"])
+                if "elements" in item:
+                    # Media Queries have nested element dictionaries
+                    if group_name == "Media Queries" and isinstance(item["elements"], list):
+                        for sub_item in item["elements"]:
+                            if isinstance(sub_item, dict) and "properties" in sub_item:
+                                sub_item["properties"] = [
+                                    p_cleaned for p_cleaned in (remove_comments(p) for p in sub_item["properties"])
+                                    if p_cleaned and p_cleaned.strip()
+                                ]
+                    else:
+                        if isinstance(item["elements"], list):
+                            item["elements"] = [
+                                el_cleaned for el_cleaned in (remove_comments(el) for el in item["elements"])
+                                if el_cleaned and el_cleaned.strip()
+                        ]
 
         tabs = list(grouped_data.keys())  # "Classes", "IDs", "Media Queries"
         filename = parsed_data[0][0] if parsed_data else ""
