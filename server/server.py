@@ -20,8 +20,9 @@ generation_status = {}
 generation_flags = {}
 generation_lock = Lock()
 
-UPLOAD_FOLDER = "static/uploads"
-DOC_FOLDER = "static/generated_docs"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DOC_FOLDER = os.path.join(BASE_DIR, "static/generated_docs")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static/uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(DOC_FOLDER, exist_ok=True)
 
