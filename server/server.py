@@ -31,30 +31,30 @@ def get_extension(filename):
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
-        print("🚀 Upload endpoint hit.")
+        print("🚀 Upload endpoint hit.", flush=True)
 
         files = request.files.getlist("files")
-        print(f"📂 Received {len(files)} file(s)")
+        print(f"📂 Received {len(files)} file(s)", flush=True)
 
         parsed_data = []
 
         # 🌟 Unique ID for tracking this generation
         generation_id = str(uuid.uuid4())
-        print(f"🆔 Generated unique generation_id: {generation_id}")
+        print(f"🆔 Generated unique generation_id: {generation_id}", flush=True)
 
         generation_status[generation_id] = "processing"
         generation_flags[generation_id] = "active"
 
         for file in files:
             filename = secure_filename(file.filename)
-            print(f"📝 Processing file: {filename}")
+            print(f"📝 Processing file: {filename}", flush=True)
 
             file_ext = get_extension(filename)
-            print(f"📄 File extension: {file_ext}")
+            print(f"📄 File extension: {file_ext}", flush=True)
 
             file_path = os.path.join(UPLOAD_FOLDER, filename)
             file.save(file_path)
-            print(f"📥 File saved to: {file_path}")
+            print(f"📥 File saved to: {file_path}", flush=True)
 
             parsed = parse_file_by_type(
                 file_path,
@@ -64,25 +64,25 @@ def upload():
             )
 
             if parsed:
-                print(f"✅ Successfully parsed {filename}")
+                print(f"✅ Successfully parsed {filename}", flush=True)
                 parsed_data.append((filename, parsed, file_ext))
             else:
-                print(f"⚠️ Failed to parse {filename} or returned None")
+                print(f"⚠️ Failed to parse {filename} or returned None", flush=True)
 
         if generation_flags[generation_id] == "cancelled":
-            print("🛑 Generation was flagged for cancellation.")
+            print("🛑 Generation was flagged for cancellation.", flush=True)
             raise Exception("Generation cancelled by user")
 
         html_filename = f"documentation_{generation_id}.html"
         html_path = os.path.join(DOC_FOLDER, html_filename)
 
-        print(f"📄 Generating HTML at: {html_path}")
+        print(f"📄 Generating HTML at: {html_path}", flush=True)
         generate_html(parsed_data, html_path, hide_buttons=False)
 
         if os.path.exists(html_path):
-            print(f"🎉 HTML file successfully created: {html_path}")
+            print(f"🎉 HTML file successfully created: {html_path}", flush=True)
         else:
-            print(f"💥 HTML file NOT created: {html_path}")
+            print(f"💥 HTML file NOT created: {html_path}", flush=True)
 
         generation_status[generation_id] = "done"
 
@@ -93,7 +93,7 @@ def upload():
         })
 
     except Exception as e:
-        print("🐍 Backend Error:", traceback.format_exc())
+        print("🐍 Backend Error:", traceback.format_exc(), flush=True)
         return jsonify({"success": False, "error": str(e)}), 500
     
 @app.route("/generate-id")
@@ -129,9 +129,11 @@ def cancel_generation():
 
     return jsonify({"success": False, "error": "Generation ID not found"}), 404
     
-@app.route("/<filename>", methods=["GET"])
+@app.route("/docs/<filename>", methods=["GET"])
 def docs(filename):
     html_path = os.path.join(DOC_FOLDER, filename)
+    print(f"📦 Fetching HTML from: {html_path}")
+
     if os.path.exists(html_path):
         return send_file(html_path)
     return "No documentation generated yet.", 404
