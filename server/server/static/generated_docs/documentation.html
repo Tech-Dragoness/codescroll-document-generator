@@ -1,0 +1,2722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>📘 CodeScroll - Auto-Generated Code Documentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefefe;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #6a5acd;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background: #f0f0f0;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #ccc;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav li {
+      display: inline;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #6a5acd;
+      text-decoration: underline;
+    }
+
+    .doc-section {
+      display: none;
+      padding: 2rem;
+    }
+
+    .doc-section.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    #toc ul,
+    #html-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 2rem auto;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    #toc ul li a,
+    #html-toc ul li a {
+      color: #6a5acd;
+      padding: 12px 20px;
+      border-left: 4px solid transparent;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      display: block;
+      background-color: transparent;
+
+      /* ✨ New Enchantment */
+      width: 33vw;
+      /* 1/3 of viewport width */
+      min-width: 220px;
+      max-width: 500px;
+      margin: 0 auto;
+      /* centers it inside .toc-box */
+      border-radius: 8px;
+    }
+
+    #toc ul li a:hover,
+    #html-toc ul li a:hover {
+      border-left: 4px solid #6a5acd;
+      background: #5b4bb7;
+      color: white;
+      border-radius: 0 5px 5px 0;
+    }
+
+    #toc h2,
+    #html-toc h2 {
+      font-size: 1.4rem;
+      min-width: 200px !important;
+      text-align: center;
+      color: #4b3ca0;
+      margin-bottom: 1rem;
+      border-bottom: 2px dashed #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .toc-box {
+      border: 3px dashed #6a5acd;
+      border-radius: 12px;
+      padding: 0 30px !important;
+      background-color: #fcfbff;
+      width: fit-content;
+      max-width: 90%;
+      margin: 1rem auto;
+      box-shadow: 0 4px 12px rgba(106, 90, 205, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .toc-box:hover {
+      box-shadow: 0 6px 18px rgba(106, 90, 205, 0.15);
+      background-color: #f7f5ff;
+    }
+
+    .nav-btn {
+      font-weight: bold;
+      background: #6a5acd;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: #5b4bb7;
+    }
+
+    @page {
+      margin: 1in;
+    }
+
+    h1,
+    h2 {
+      page-break-before: always;
+    }
+
+    @page :first {
+      margin-top: 0;
+    }
+
+    @media print {
+      .doc-section {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📘 Html Code Documentation</h1>
+  </header>
+
+  
+
+  
+
+  <!-- 🍭 Navigation for HTML Tags -->
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('html-toc')">🏠 Table of Contents</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-link')">🔖 &lt;link&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-div')">🔖 &lt;div&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-img')">🔖 &lt;img&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-ul')">🔖 &lt;ul&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-li')">🔖 &lt;li&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-a')">🔖 &lt;a&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-p')">🔖 &lt;p&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-section')">🔖 &lt;section&gt;</a></li>
+      
+      <li><a href="#" onclick="showSection('tag-script')">🔖 &lt;script&gt;</a></li>
+      
+      <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
+      <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🏠 HTML Table of Contents -->
+  <section id="html-toc" class="doc-section active">
+    <h2>🏠 Table of Contents</h2>
+    <div class="toc-box">
+      <ul>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-link')">🔖 &lt;link&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-div')">🔖 &lt;div&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-img')">🔖 &lt;img&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-ul')">🔖 &lt;ul&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-li')">🔖 &lt;li&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-a')">🔖 &lt;a&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-p')">🔖 &lt;p&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-section')">🔖 &lt;section&gt; Elements</a>
+        </li>
+        
+        <li>
+          <a href="#" onclick="showSection('tag-script')">🔖 &lt;script&gt; Elements</a>
+        </li>
+        
+      </ul>
+    </div>
+  </section>
+
+  <!-- 📄 One section per HTML tag -->
+  
+  <section id="tag-link" class="doc-section">
+    <h2>🔖 &lt;link&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="icon" type="image/png" href="Sophia_College_Logo.png"</td>
+          <td>Defines the favicon for the webpage.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css"</td>
+          <td>Links to a Bootstrap CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>href="plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css"</td>
+          <td>Links to a Font Awesome CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"</td>
+          <td>Links to a Font Awesome CSS stylesheet from a CDN.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css"</td>
+          <td>Links to an Owl Carousel CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css"</td>
+          <td>Links to an Owl Carousel default theme CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css"</td>
+          <td>Links to an Owl Carousel animation CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="styles/main_styles.css"</td>
+          <td>Links to a main CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="styles/responsive.css"</td>
+          <td>Links to a responsive CSS stylesheet.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rel="stylesheet" type="text/css" href="styles/form_css.css"</td>
+          <td>Links to a form CSS stylesheet.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-div" class="doc-section">
+    <h2>🔖 &lt;div&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>super_container</td>
+          
+          <td>—</td>
+          <td>Defines the structure of the webpage, including the header, navigation, and various sections like about us, notices, timings, rules, facilities and events.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>header_content d-flex flex-row align-items-center</td>
+          
+          <td>—</td>
+          <td>Defines the header content, including the logo and main navigation.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>logo_container</td>
+          
+          <td>—</td>
+          <td>Defines the logo container.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>logo</td>
+          
+          <td>—</td>
+          <td>Defines the logo image.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav</td>
+          
+          <td>—</td>
+          <td>Defines the main navigation with links.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>collection-links</td>
+          <td>dropdown_menu</td>
+          
+          <td>—</td>
+          <td>List item with a link to rules and regulations</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>archive-links</td>
+          <td>dropdown_menu</td>
+          
+          <td>—</td>
+          <td>List item with a link to facilities and services</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>login-button</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Paragraph with the text &#39;Login&#39;</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>logout-button</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Paragraph with the text &#39;Logout&#39;</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>popup</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Div containing login and recovery forms</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>popup-content</td>
+          
+          <td>—</td>
+          <td>Div with login form containing email, password, and a &#39;Forgot email/password?&#39; link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>login-form</td>
+          
+          <td>—</td>
+          <td>Div for displaying email error</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>email-error</td>
+          <td>error</td>
+          
+          <td>—</td>
+          <td>Div for displaying password error</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>password-error</td>
+          <td>error</td>
+          
+          <td>—</td>
+          <td>Link to recover email/password</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>recovery-form</td>
+          
+          <td>—</td>
+          <td>Div for displaying phone error</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>phone-error</td>
+          <td>error</td>
+          
+          <td>—</td>
+          <td>Link to go back to Login</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>hamburger_container</td>
+          
+          <td>—</td>
+          <td>Mobile menu container with menu items and submenus</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_container menu_mm</td>
+          
+          <td>—</td>
+          <td>Div containing the menu close button</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_close_container</td>
+          
+          <td>—</td>
+          <td>Div for the menu close button</td>
+        </tr>
+        
+        <tr>
+          <td>118</td>
+          
+          <td>—</td>
+          <td>menu_close</td>
+          
+          <td>—</td>
+          <td>Div containing the full menu</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_inner menu_mm</td>
+          
+          <td>—</td>
+          <td>Div containing a menu list</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu menu_mm</td>
+          
+          <td>—</td>
+          <td>Unordered list for the menu</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>home</td>
+          
+          <td>—</td>
+          <td>Div containing the main carousel and navigation</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_container</td>
+          
+          <td>—</td>
+          <td>Div containing the owl carousel</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel owl-carousel</td>
+          
+          <td>—</td>
+          <td>Div for a main carousel slide</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide</td>
+          
+          <td>—</td>
+          <td>Div for the main carousel slide background</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_background</td>
+          
+          <td>—</td>
+          <td>Div for the container of the slide content</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_container d-flex flex-column align-items-center justify-content-center</td>
+          
+          <td>—</td>
+          <td>Contains content of a carousel slide content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_content text-center</td>
+          
+          <td>—</td>
+          <td>Contains header with college name and information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>custom-header</td>
+          
+          <td>data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut"</td>
+          <td>Contains a carousel slide with background and content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide</td>
+          
+          <td>—</td>
+          <td>Contains the background for a carousel slide.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_background</td>
+          
+          <td>—</td>
+          <td>Contains the container for a carousel slide&#39;s content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_container d-flex flex-column align-items-center justify-content-center</td>
+          
+          <td>—</td>
+          <td>Contains content of a carousel slide content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_content text-center</td>
+          
+          <td>—</td>
+          <td>Contains header with college name and information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>custom-header</td>
+          
+          <td>data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut"</td>
+          <td>Contains a carousel slide with background and content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide</td>
+          
+          <td>—</td>
+          <td>Contains the background for a carousel slide.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_background</td>
+          
+          <td>—</td>
+          <td>Contains the container for a carousel slide&#39;s content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_container d-flex flex-column align-items-center justify-content-center</td>
+          
+          <td>—</td>
+          <td>Contains content of a carousel slide content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_slide_content text-center</td>
+          
+          <td>—</td>
+          <td>Contains header with college name and information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>custom-header</td>
+          
+          <td>data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut"</td>
+          <td>Left arrow for the main carousel navigation.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_left main_carousel_nav trans_200</td>
+          
+          <td>—</td>
+          <td>Right arrow for the main carousel navigation.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_carousel_right main_carousel_nav trans_200</td>
+          
+          <td>—</td>
+          <td>Contains a section with notices, gallery, and timings links.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_boxes</td>
+          
+          <td>—</td>
+          <td>Contains a section with notices, gallery, and timings links.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_boxes_inner</td>
+          
+          <td>—</td>
+          <td>Contains a section with notices, gallery, and timings links.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>container</td>
+          
+          <td>—</td>
+          <td>Contains a section with notices, gallery, and timings links.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>Contains a link to notices section with its content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box d-flex flex-row align-items-center justify-content-start</td>
+          
+          <td>—</td>
+          <td>Contains content related to notices.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_content</td>
+          
+          <td>—</td>
+          <td>Contains a link to the gallery with its content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box d-flex flex-row align-items-center justify-content-start</td>
+          
+          <td>—</td>
+          <td>Contains content related to the gallery.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_content</td>
+          
+          <td>—</td>
+          <td>Contains a link to the timings section with its content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box d-flex flex-row align-items-center justify-content-start</td>
+          
+          <td>—</td>
+          <td>A div containing content with a title and link.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_content</td>
+          
+          <td>—</td>
+          <td>A div with class and id for about section adjustment.</td>
+        </tr>
+        
+        <tr>
+          <td>273</td>
+          
+          <td>about</td>
+          <td>scroll-adjust-about</td>
+          
+          <td>—</td>
+          <td>A complex about us section with titles, text, image, and a history button.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>about page_section</td>
+          
+          <td>—</td>
+          <td>A container div containing a row and column with a title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>container</td>
+          
+          <td>—</td>
+          <td>A row containing a column with a title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>A column containing a title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col</td>
+          
+          <td>—</td>
+          <td>A section title with About Us.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>section_title text-center animate-main</td>
+          
+          <td>—</td>
+          <td>A div containing about us content with library details, image and history button.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>AboutUs animate-group</td>
+          
+          <td>—</td>
+          <td>A container fluid containing a row and about us content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>container-fluid</td>
+          
+          <td>—</td>
+          <td>A row containing about us content, including a library section and an image section.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row row-eq-height</td>
+          
+          <td>—</td>
+          <td>A column containing about us section.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-6 nopadding</td>
+          
+          <td>—</td>
+          <td>A section containing the college library information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-6 nopadding</td>
+          
+          <td>—</td>
+          <td>A div containing the image and history button.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>about_img_section d-flex flex-column align-items-center justify-content-center</td>
+          
+          <td>—</td>
+          <td>A div with an image and history button.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>image-container</td>
+          
+          <td>—</td>
+          <td>An image tag for the library image.</td>
+        </tr>
+        
+        <tr>
+          <td>324</td>
+          
+          <td>—</td>
+          <td>shadow-overlay</td>
+          
+          <td>—</td>
+          <td>A div for the history button with a link.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>history_button</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>A link to history with an arrow icon.</td>
+        </tr>
+        
+        <tr>
+          <td>341</td>
+          
+          <td>aboutDetails</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>A hidden div containing membership and faculty information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>detailsSection</td>
+          <td>hidden</td>
+          
+          <td>—</td>
+          <td>A half-section card containing membership information.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>membership</td>
+          <td>half-section card</td>
+          
+          <td>—</td>
+          <td>Faculty section container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>faculty</td>
+          <td>half-section card</td>
+          
+          <td>—</td>
+          <td>Unordered list for current staff</td>
+        </tr>
+        
+        <tr>
+          <td>370</td>
+          
+          <td>notices</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Notices heading row</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>Notices heading column</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col</td>
+          
+          <td>—</td>
+          <td>Notices heading</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>notices_head</td>
+          <td>section_title text-center animate-main</td>
+          
+          <td>—</td>
+          <td>Notices text section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>text-box</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Notices scrolling text</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>notices-box</td>
+          <td>scrolling-text</td>
+          
+          <td>—</td>
+          <td>Timings adjust timings</td>
+        </tr>
+        
+        <tr>
+          <td>390</td>
+          
+          <td>timings</td>
+          <td>scroll-adjust-timings</td>
+          
+          <td>—</td>
+          <td>Timings heading row</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>Timings heading column</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col</td>
+          
+          <td>—</td>
+          <td>Timings heading</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>timings-head</td>
+          <td>section_title text-center animate-main</td>
+          
+          <td>—</td>
+          <td>Timings board container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>timingsBoard animate-group</td>
+          
+          <td>—</td>
+          <td>Timings and calendar container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>container-fluid</td>
+          
+          <td>—</td>
+          <td>Timings and calendar container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row row-eq-height</td>
+          
+          <td>—</td>
+          <td>Timings Left Section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-6 nopadding</td>
+          
+          <td>—</td>
+          <td>Timings Section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>timings-container</td>
+          
+          <td>—</td>
+          <td>Library timings header</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-6 nopadding</td>
+          
+          <td>—</td>
+          <td>Div with a calendar section.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar_section d-flex flex-column align-items-center justify-content-center</td>
+          
+          <td>—</td>
+          <td>Div for calendar background.</td>
+        </tr>
+        
+        <tr>
+          <td>452</td>
+          
+          <td>—</td>
+          <td>calendar_background</td>
+          
+          <td>—</td>
+          <td>Div with calendar content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar_content text-center</td>
+          
+          <td>—</td>
+          <td>Paragraph with class &#39;calendar-top&#39; for calendar title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar-container</td>
+          
+          <td>—</td>
+          <td>Div containing calendar header with navigation buttons.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar-header</td>
+          
+          <td>—</td>
+          <td>Div for calendar weekdays.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar-days</td>
+          
+          <td>—</td>
+          <td>Div for Sunday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>464</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Monday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>465</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Tuesday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>466</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Wednesday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>467</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Thursday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>468</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Friday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>469</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for Saturday weekday label.</td>
+        </tr>
+        
+        <tr>
+          <td>470</td>
+          
+          <td>—</td>
+          <td>weekday</td>
+          
+          <td>—</td>
+          <td>Div for calendar grid.</td>
+        </tr>
+        
+        <tr>
+          <td>473</td>
+          
+          <td>calendar-grid</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Div with general info section title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>generalinfo</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>Div with general info section title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col</td>
+          
+          <td>—</td>
+          <td>Div for general info section title.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>generalinfo-head</td>
+          <td>section_title text-center animate-main</td>
+          
+          <td>—</td>
+          <td>Div containing rules and regulations section.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rules</td>
+          <td>—</td>
+          
+          <td>style="padding-top: 80px; margin-top: -80px;"</td>
+          <td>Section for rules and regulations.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>rules-container</td>
+          <td>grid</td>
+          
+          <td>—</td>
+          <td>Anchor tag for &#39;Know More&#39; link.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>facilities</td>
+          <td>—</td>
+          
+          <td>style="padding-top: 80px; margin-top: -80px;"</td>
+          <td>Section for facilities and services</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>facilities-grid</td>
+          <td>grid</td>
+          
+          <td>—</td>
+          <td>Div containing events section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>events</td>
+          <td>—</td>
+          
+          <td>style="padding-top: 80px; margin-top: -80px;"</td>
+          <td>Section for events and programs</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>events-grid</td>
+          <td>grid</td>
+          
+          <td>—</td>
+          <td>Footer container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>container</td>
+          
+          <td>—</td>
+          <td>Footer content</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_content</td>
+          
+          <td>—</td>
+          <td>Row within footer content</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>row</td>
+          
+          <td>—</td>
+          <td>Footer column with logo</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-3 footer_col</td>
+          
+          <td>—</td>
+          <td>Logo container within footer</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>logo_container</td>
+          
+          <td>—</td>
+          <td>Logo and text within logo container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>logo</td>
+          
+          <td>—</td>
+          <td>Resized logo image</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>footer-logo-text1</td>
+          <td>footer_logo_text</td>
+          
+          <td>—</td>
+          <td>Useful links column</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-3 footer_col</td>
+          
+          <td>—</td>
+          <td>Useful Links title</td>
+        </tr>
+        
+        <tr>
+          <td>565</td>
+          
+          <td>—</td>
+          <td>footer_column_title</td>
+          
+          <td>—</td>
+          <td>Useful Links content</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_column_content</td>
+          
+          <td>—</td>
+          <td>Unordered list of useful links</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>col-lg-3 footer_col</td>
+          
+          <td>—</td>
+          <td>HTML contact us title</td>
+        </tr>
+        
+        <tr>
+          <td>580</td>
+          
+          <td>—</td>
+          <td>footer_column_title</td>
+          
+          <td>—</td>
+          <td>HTML footer contact information</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_column_content</td>
+          
+          <td>—</td>
+          <td>HTML unordered list of contact items</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_icon</td>
+          
+          <td>—</td>
+          <td>HTML image tag with placeholder icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_icon</td>
+          
+          <td>—</td>
+          <td>HTML image tag with phone icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_icon</td>
+          
+          <td>—</td>
+          <td>HTML image tag with envelope icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_text</td>
+          
+          <td>—</td>
+          <td>HTML footer bar with copyright notice</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_bar d-flex flex-column flex-sm-row align-items-center</td>
+          
+          <td>—</td>
+          <td>HTML copyright notice</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_copyright</td>
+          
+          <td>—</td>
+          <td>HTML script tag to write current year</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-img" class="doc-section">
+    <h2>🔖 &lt;img&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>navbar-logo</td>
+          <td>resized-image</td>
+          
+          <td>src="Sophia_College_Logo_og.png" alt=""</td>
+          <td>Defines the image tag for the logo.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>library-image</td>
+          <td>—</td>
+          
+          <td>src="Main_images/About.jpeg" alt="Library"</td>
+          <td>A div for a shadow overlay.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>resized-logo</td>
+          
+          <td>src="Sophia_College_Logo_og.png" alt=""</td>
+          <td>Footer logo text</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>src="Icons/placeholder.svg" alt="https://www.flaticon.com/authors/lucy-g"</td>
+          <td>HTML list item with phone contact info</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>src="Icons/phone-call.svg" alt="https://www.flaticon.com/authors/lucy-g"</td>
+          <td>HTML list item with email contact info</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>src="Icons/envelope.svg" alt="https://www.flaticon.com/authors/lucy-g"</td>
+          <td>HTML footer contact text</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-ul" class="doc-section">
+    <h2>🔖 &lt;ul&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_list</td>
+          
+          <td>—</td>
+          <td>Defines the list of main navigation items.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_list menu_mm</td>
+          
+          <td>—</td>
+          <td>List item for the Home link</td>
+        </tr>
+        
+        <tr>
+          <td>130</td>
+          
+          <td>—</td>
+          <td>submenu collection-list</td>
+          
+          <td>—</td>
+          <td>List item for the Rules &amp; Regulations link</td>
+        </tr>
+        
+        <tr>
+          <td>135</td>
+          
+          <td>—</td>
+          <td>submenu archives-list</td>
+          
+          <td>—</td>
+          <td>List item for the Facilities &amp; Services link</td>
+        </tr>
+        
+        <tr>
+          <td>361</td>
+          
+          <td>current-staff-list</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Unordered list for ex-librarians</td>
+        </tr>
+        
+        <tr>
+          <td>364</td>
+          
+          <td>ex-librarians-list</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Notices section container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>List item for e-resources link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>HTML list item containing contact info</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-li" class="doc-section">
+    <h2>🔖 &lt;li&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>41</td>
+          
+          <td>—</td>
+          <td>main_nav_item</td>
+          
+          <td>—</td>
+          <td>Defines a main navigation item with a link to the home page.</td>
+        </tr>
+        
+        <tr>
+          <td>42</td>
+          
+          <td>—</td>
+          <td>main_nav_item</td>
+          
+          <td>—</td>
+          <td>Defines a main navigation item with a link to the about us page.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_item dropdown e-resources</td>
+          
+          <td>—</td>
+          <td>Defines a navigation item with links to e-resources, collection, rules, archives, and facilities.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_item dropdown</td>
+          
+          <td>—</td>
+          <td>Defines a main navigation item related to collection with a dropdown menu.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_item</td>
+          
+          <td>—</td>
+          <td>Link to rules and regulations</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_item</td>
+          
+          <td>—</td>
+          <td>Link to archives with a dropdown icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_nav_item dropdown</td>
+          
+          <td>—</td>
+          <td>Link to facilities and services</td>
+        </tr>
+        
+        <tr>
+          <td>125</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm</td>
+          
+          <td>—</td>
+          <td>Home link</td>
+        </tr>
+        
+        <tr>
+          <td>126</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm</td>
+          
+          <td>—</td>
+          <td>About us link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm e-resources</td>
+          
+          <td>—</td>
+          <td>Sophia E-Book Hub link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm collection-toggle</td>
+          
+          <td>—</td>
+          <td>Collection link with dropdown icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm</td>
+          
+          <td>—</td>
+          <td>Rules &amp; Regulations link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm archives-toggle</td>
+          
+          <td>—</td>
+          <td>Archives link with dropdown icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>menu_item menu_mm</td>
+          
+          <td>—</td>
+          <td>Facilities &amp; Services link</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_list_item e-resources</td>
+          
+          <td>—</td>
+          <td>E-Book Hub link</td>
+        </tr>
+        
+        <tr>
+          <td>570</td>
+          
+          <td>—</td>
+          <td>footer_list_item</td>
+          
+          <td>—</td>
+          <td>Timings link</td>
+        </tr>
+        
+        <tr>
+          <td>571</td>
+          
+          <td>—</td>
+          <td>footer_list_item</td>
+          
+          <td>—</td>
+          <td>HTML link to Notices</td>
+        </tr>
+        
+        <tr>
+          <td>572</td>
+          
+          <td>—</td>
+          <td>footer_list_item</td>
+          
+          <td>—</td>
+          <td>HTML link to Gallery</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>footer-clg-name</td>
+          <td>footer_contact_item</td>
+          
+          <td>—</td>
+          <td>HTML contact icon div</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_item</td>
+          
+          <td>—</td>
+          <td>HTML contact icon div with phone icon</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>footer_contact_item</td>
+          
+          <td>—</td>
+          <td>HTML contact icon div with envelope icon</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-a" class="doc-section">
+    <h2>🔖 &lt;a&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>41</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>Defines a link to the home page.</td>
+        </tr>
+        
+        <tr>
+          <td>42</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#about"</td>
+          <td>Defines a link to the about us page.</td>
+        </tr>
+        
+        <tr>
+          <td>43</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#open-popup"</td>
+          <td>Defines a link to the Sophia E-Book Hub.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>Div with dropdown menu for collection links</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#rules"</td>
+          <td>List item with link to archives and a dropdown menu</td>
+        </tr>
+        
+        <tr>
+          <td>51</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>Div with dropdown menu for archive links</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#facilities"</td>
+          <td>Div with login button containing an icon and text</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>switch-to-recovery</td>
+          
+          <td>href="#"</td>
+          <td>Div containing a recovery form for mobile authentication</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>switch-to-login</td>
+          
+          <td>href="#"</td>
+          <td>Div with a hamburger icon</td>
+        </tr>
+        
+        <tr>
+          <td>125</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>List item for the About us link</td>
+        </tr>
+        
+        <tr>
+          <td>126</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#about"</td>
+          <td>List item for the Sophia E-Book Hub link</td>
+        </tr>
+        
+        <tr>
+          <td>43</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#open-popup"</td>
+          <td>List item for the Collection with dropdown</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>Unordered list for the collection submenu</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#rules"</td>
+          <td>List item for the Archives with dropdown</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#"</td>
+          <td>Unordered list for the archives submenu</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#facilities"</td>
+          <td>Div containing the main carousel</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_link_wrapper</td>
+          
+          <td>href="#notices"</td>
+          <td>Contains a box with content related to notices.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_link_wrapper</td>
+          
+          <td>href="gallery.html"</td>
+          <td>Contains a box with content related to the gallery.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>main_box_link_wrapper</td>
+          
+          <td>href="#timings"</td>
+          <td>A div with class, SVG, and content.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>outline-button</td>
+          
+          <td>href="history.html"</td>
+          <td>A div with the id aboutDetails.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>know-more-rules</td>
+          <td>know-more</td>
+          
+          <td>href="#" target="_blank" style="position: absolute; top: 10px; right: 20px; display: none;"</td>
+          <td>Div containing facilities section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>know-more-facilities</td>
+          <td>know-more</td>
+          
+          <td>href="#" target="_blank" style="position: absolute; top: 10px; right: 20px; display: none;"</td>
+          <td>Div for facilities grid</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>know-more-events</td>
+          <td>know-more</td>
+          
+          <td>href="#" target="_blank" style="position: absolute; top: 10px; right: 20px; display: none;"</td>
+          <td>Div for events grid</td>
+        </tr>
+        
+        <tr>
+          <td>43</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#open-popup"</td>
+          <td>List item for timings link</td>
+        </tr>
+        
+        <tr>
+          <td>570</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#timings"</td>
+          <td>List item for notices link</td>
+        </tr>
+        
+        <tr>
+          <td>571</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="#notices"</td>
+          <td>HTML list item with link to Gallery</td>
+        </tr>
+        
+        <tr>
+          <td>572</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>href="gallery.html"</td>
+          <td>HTML contact us div including contact info</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-p" class="doc-section">
+    <h2>🔖 &lt;p&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>65</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Div with logout button containing an icon and text</td>
+        </tr>
+        
+        <tr>
+          <td>72</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Popup div with login and recovery forms</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>A column with an image section and history button.</td>
+        </tr>
+        
+        <tr>
+          <td>410</td>
+          
+          <td>—</td>
+          <td>timings-header</td>
+          
+          <td>—</td>
+          <td>Timings table section</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>timings-header</td>
+          
+          <td>—</td>
+          <td>Fiction timings table section</td>
+        </tr>
+        
+        <tr>
+          <td>440</td>
+          
+          <td>first-timing</td>
+          <td>timings</td>
+          
+          <td>—</td>
+          <td>Paragraph with class &#39;timings&#39; describing library hours.</td>
+        </tr>
+        
+        <tr>
+          <td>441</td>
+          
+          <td>—</td>
+          <td>timings</td>
+          
+          <td>—</td>
+          <td>Div with a calendar section.</td>
+        </tr>
+        
+        <tr>
+          <td>454</td>
+          
+          <td>—</td>
+          <td>calendar-top</td>
+          
+          <td>—</td>
+          <td>Section for the calendar.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-section" class="doc-section">
+    <h2>🔖 &lt;section&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>ID</th>
+          <th>Class</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>about-section</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>A section containing the college library text.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>about_text</td>
+          <td>animate-group</td>
+          
+          <td>—</td>
+          <td>A paragraph describing the Sophia Library.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>notices_text</td>
+          <td>animate-group</td>
+          
+          <td>—</td>
+          <td>Notices text box</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>timings-section</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Timings container</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>timings-table</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>Fiction section timings header</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>fiction-timings-table</td>
+          <td>—</td>
+          
+          <td>—</td>
+          <td>First timing paragraph</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>calendar-section</td>
+          
+          <td>—</td>
+          <td>Div containing calendar components.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>section animate-group</td>
+          
+          <td>—</td>
+          <td>Div for rules container.</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>section animate-group</td>
+          
+          <td>—</td>
+          <td>Know more link for facilities</td>
+        </tr>
+        
+        <tr>
+          <td>638</td>
+          
+          <td>—</td>
+          <td>section animate-group</td>
+          
+          <td>—</td>
+          <td>Know more link for events</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="tag-script" class="doc-section">
+    <h2>🔖 &lt;script&gt; Elements</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>Attributes</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>618</td>
+          
+          <td>—</td>
+          <td>HTML script tag to import jquery library</td>
+        </tr>
+        
+        <tr>
+          <td>627</td>
+          
+          <td>src="js/jquery-3.2.1.min.js"</td>
+          <td>HTML script tag to import script.js</td>
+        </tr>
+        
+        <tr>
+          <td>628</td>
+          
+          <td>src="js/script.js"</td>
+          <td>HTML script tag to import custom.js</td>
+        </tr>
+        
+        <tr>
+          <td>629</td>
+          
+          <td>src="js/custom.js"</td>
+          <td>HTML script tag to import popper.js</td>
+        </tr>
+        
+        <tr>
+          <td>630</td>
+          
+          <td>src="styles/bootstrap4/popper.js"</td>
+          <td>HTML script tag to import bootstrap.min.js</td>
+        </tr>
+        
+        <tr>
+          <td>631</td>
+          
+          <td>src="styles/bootstrap4/bootstrap.min.js"</td>
+          <td>Loads ScrollMagic library from a local plugin directory.</td>
+        </tr>
+        
+        <tr>
+          <td>632</td>
+          
+          <td>src="plugins/scrollmagic/ScrollMagic.min.js"</td>
+          <td>Loads OwlCarousel2 library from a local plugin directory.</td>
+        </tr>
+        
+        <tr>
+          <td>633</td>
+          
+          <td>src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"</td>
+          <td>Loads the canvas-confetti library from a CDN.</td>
+        </tr>
+        
+        <tr>
+          <td>634</td>
+          
+          <td>src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"</td>
+          <td>—</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+
+  
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.doc-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Magic to read the query param
+    function getFilenameFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('filename');
+    }
+
+    // 🪄 Store filename in a global variable (or hidden field)
+    const selectedFile = getFilenameFromURL();
+
+    function downloadHTML() {
+      if (!selectedFile) {
+        alert("No file selected to download HTML.");
+        return;
+      }
+      window.open('/download-html?filename=' + encodeURIComponent(selectedFile), '_blank');
+    }
+
+    function downloadPDF() {
+      if (!selectedFile) {
+        alert("No file selected to generate PDF.");
+        return;
+      }
+      window.open('/download-pdf?filename=' + encodeURIComponent(selectedFile), '_blank');
+    }
+  </script>
+
+</body>
+
+</html>

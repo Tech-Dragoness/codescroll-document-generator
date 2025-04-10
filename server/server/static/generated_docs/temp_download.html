@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>📘 CodeScroll - Auto-Generated Code Documentation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fefefe;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #6a5acd;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background: #f0f0f0;
+      padding: 1rem 2rem;
+      border-bottom: 2px solid #ccc;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav li {
+      display: inline;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #6a5acd;
+      text-decoration: underline;
+    }
+
+    .doc-section {
+      display: none;
+      padding: 2rem;
+    }
+
+    .doc-section.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    #toc ul,
+    #html-toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 2rem auto;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    #toc ul li a,
+    #html-toc ul li a {
+      color: #6a5acd;
+      padding: 12px 20px;
+      border-left: 4px solid transparent;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      display: block;
+      background-color: transparent;
+
+      /* ✨ New Enchantment */
+      width: 33vw;
+      /* 1/3 of viewport width */
+      min-width: 220px;
+      max-width: 500px;
+      margin: 0 auto;
+      /* centers it inside .toc-box */
+      border-radius: 8px;
+    }
+
+    #toc ul li a:hover,
+    #html-toc ul li a:hover {
+      border-left: 4px solid #6a5acd;
+      background: #5b4bb7;
+      color: white;
+      border-radius: 0 5px 5px 0;
+    }
+
+    #toc h2,
+    #html-toc h2 {
+      font-size: 1.4rem;
+      min-width: 200px !important;
+      text-align: center;
+      color: #4b3ca0;
+      margin-bottom: 1rem;
+      border-bottom: 2px dashed #ddd;
+      padding-bottom: 0.5rem;
+    }
+
+    .toc-box {
+      border: 3px dashed #6a5acd;
+      border-radius: 12px;
+      padding: 0 30px !important;
+      background-color: #fcfbff;
+      width: fit-content;
+      max-width: 90%;
+      margin: 1rem auto;
+      box-shadow: 0 4px 12px rgba(106, 90, 205, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .toc-box:hover {
+      box-shadow: 0 6px 18px rgba(106, 90, 205, 0.15);
+      background-color: #f7f5ff;
+    }
+
+    .nav-btn {
+      font-weight: bold;
+      background: #6a5acd;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin-left: 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: #5b4bb7;
+    }
+
+    @page {
+      margin: 1in;
+    }
+
+    h1,
+    h2 {
+      page-break-before: always;
+    }
+
+    @page :first {
+      margin-top: 0;
+    }
+
+    @media print {
+      .doc-section {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📘 Python Code Documentation</h1>
+  </header>
+
+  
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('toc')">🏠 Table of Contents</a></li>
+      <li><a href="#" onclick="showSection('classes')">🧱 Classes</a></li>
+      <li><a href="#" onclick="showSection('functions')">⚙️ Functions</a></li>
+      <li><a href="#" onclick="showSection('if')">🔀 If</a></li>
+      <li><a href="#" onclick="showSection('for')">🔁 For</a></li>
+      <li><a href="#" onclick="showSection('while')">🔁 While</a></li>
+      
+      <li><a href="#" onclick="showSection('switch')">🌀 Match Cases</a></li>
+      
+      <li><a href="#" onclick="showSection('try')">🛡️ Try</a></li>
+      
+    </ul>
+  </nav>
+
+  <!-- 📚 Table of Contents -->
+  <section id="toc" class="doc-section active">
+    <h2>🏠 Table of Contents</h2>
+    <div class="toc-box">
+      <ul>
+        <li><a href="#" onclick="showSection('classes')">🧱 Classes</a></li>
+        <li><a href="#" onclick="showSection('functions')">⚙️ Functions</a></li>
+        <li><a href="#" onclick="showSection('if')">🔀 If Statements</a></li>
+        <li><a href="#" onclick="showSection('for')">🔁 For Loops</a></li>
+        <li><a href="#" onclick="showSection('while')">🔁 While Loops</a></li>
+        
+        <li><a href="#" onclick="showSection('switch')">🌀 Match Cases</a></li>
+        
+        <li><a href="#" onclick="showSection('try')">🛡️ Try Blocks</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 🌟 Classes Section -->
+  <section id="classes" class="doc-section">
+    <h2>🧱 Classes</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Methods</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>TranslateRequest</td>
+          <td>
+            <ul>
+              
+            </ul>
+          </td>
+          <td>
+            
+            Defines a data model for translate requests.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>CodeInput</td>
+          <td>
+            <ul>
+              
+            </ul>
+          </td>
+          <td>
+            
+            Defines a data model for code input, including syntax and settings.
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+
+  <!-- 🌟 Functions Section -->
+  <section id="functions" class="doc-section">
+    <h2>⚙️ Functions</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Params</th>
+          <th>Returns</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>clean_spaces</td>
+          <td>text</td>
+          <td>
+            
+            str
+            
+          </td>
+          <td>
+            
+            Replaces non-breaking spaces with regular spaces.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>validate_syntax</td>
+          <td>line, alias_map, syntax_map, enclosures, settings</td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Validates the syntax of a given line based on provided rules.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>translate</td>
+          <td>request</td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Handles the translation of custom code based on a defined language and syntax, returning the translated code or an error.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>run_custom_code</td>
+          <td>input</td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Runs custom code line by line, handling potential errors.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>define_language</td>
+          <td>blocks</td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Defines a custom language by mapping keywords and datatypes with enclosure specifications.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>home</td>
+          <td></td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Returns a welcome message.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>create_language</td>
+          <td>language</td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Saves a defined language grammar.
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td>list_languages</td>
+          <td></td>
+          <td>
+            
+            None
+            
+          </td>
+          <td>
+            
+            Lists all saved languages.
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+
+  <!-- 🌟 Control Flows Section -->
+  
+  <section id="if" class="doc-section">
+    <h2>
+      
+      If Statements
+      
+    </h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>Condition</th>
+          
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>45</td>
+          
+          <td>line.startswith(alias)</td>
+          
+          <td>Checks if a line starts with an alias and validates its syntax.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>167</td>
+          
+          <td>not line.strip()</td>
+          
+          <td>Skips empty lines.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>170</td>
+          
+          <td>result.get('success')</td>
+          
+          <td>Appends the translated python code or returns an error based on the result.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>190</td>
+          
+          <td>block['type'].startswith('custom_')</td>
+          
+          <td>Defines language components (keywords, datatypes) and their enclosures, preventing overlapping enclosures.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>48</td>
+          
+          <td>not expected_syntax</td>
+          
+          <td>Allows syntax if no syntax is defined.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>57</td>
+          
+          <td>input_parts[0] != alias</td>
+          
+          <td>Returns False if the first word doesn't match the alias.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>61</td>
+          
+          <td>'parameters' in syntax_parts or 'statements' in syntax_parts</td>
+          
+          <td>Validates syntax with parameters, statements, or exact matches, returning True or False.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>129</td>
+          
+          <td>not validate_syntax(line.strip(), alias_map, syntax_map, enclosures, settings)</td>
+          
+          <td>Returns an error if the syntax is invalid.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>141</td>
+          
+          <td>not matched</td>
+          
+          <td>Return an error if the line contains an unknown keyword.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>192</td>
+          
+          <td>block['type'] == 'datatype'</td>
+          
+          <td>If the block type is datatype, validate and store datatype enclosure information.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>62</td>
+          
+          <td>len(input_parts) < 2</td>
+          
+          <td>Return False if there are fewer than two input parts.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>78</td>
+          
+          <td>settings.get('enforce_indentation') and 'statements' in syntax_parts</td>
+          
+          <td>Print a message indicating indentation-based syntax or statement enclosure validation passed.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>87</td>
+          
+          <td>len(input_parts) != len(syntax_parts)</td>
+          
+          <td>Return False if the number of input parts does not match the syntax parts.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>134</td>
+          
+          <td>re.match(f'^{re.escape(alias)}\\b', line)</td>
+          
+          <td>If the line matches the alias, extract arguments and translate the line.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>197</td>
+          
+          <td>(start, end) in used_enclosures</td>
+          
+          <td>If the enclosure is already used, and not for a char/string of the same type, return an error.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>74</td>
+          
+          <td>not matched</td>
+          
+          <td>Return False if a part is not enclosed in any valid wrapper.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>82</td>
+          
+          <td>'statements' in syntax_parts</td>
+          
+          <td>Print a message indicating statement enclosure validation passed.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>92</td>
+          
+          <td>expected == 'keyword' and actual != alias</td>
+          
+          <td>Check for keyword or literal mismatches and return False if found.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>198</td>
+          
+          <td>not (dtype in ['char', 'string'] and any((d in ['char', 'string'] and datatype_map[d]['start'] == start and (datatype_map[d]['end'] == end) for d in datatype_map)))</td>
+          
+          <td>Return an error if the enclosure is already used and not for the same char/string type.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>70</td>
+          
+          <td>part.startswith(wrap['start']) and part.endswith(wrap['end'])</td>
+          
+          <td>If the part is enclosed in a wrapper, set matched to True and break.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>95</td>
+          
+          <td>expected not in ['parameters', 'statements'] and expected != actual</td>
+          
+          <td>Return False if the expected literal doesn't match the actual.</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="for" class="doc-section">
+    <h2>
+      
+      For Statements
+      
+    </h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>Condition</th>
+          
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>44</td>
+          
+          <td>(alias, keyword) in alias_map.items()</td>
+          
+          <td>Iterates through an alias map to validate syntax.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>166</td>
+          
+          <td>line in input.code.splitlines()</td>
+          
+          <td>Iterates through lines of code, running each through a custom code runner.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>189</td>
+          
+          <td>block in blocks</td>
+          
+          <td>Iterates through blocks to define keyword mappings and datatype enclosures, preventing enclosure conflicts.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>128</td>
+          
+          <td>line in raw_code.strip().splitlines()</td>
+          
+          <td>Iterates through the lines of raw code to validate syntax and translate the code using aliases.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>133</td>
+          
+          <td>(alias, keyword) in alias_map.items()</td>
+          
+          <td>Iterates through aliases to find a match and translate the line.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>66</td>
+          
+          <td>part in input_parts[1:]</td>
+          
+          <td>Iterate through input parts to check if each part is enclosed in valid wrappers.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>91</td>
+          
+          <td>(expected, actual) in zip(syntax_parts, input_parts)</td>
+          
+          <td>Iterate through expected and actual parts, checking for keyword or literal mismatches.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>69</td>
+          
+          <td>(dtype, wrap) in enclosures.items()</td>
+          
+          <td>Iterate through enclosures to find a match for the current part.</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="while" class="doc-section">
+    <h2>
+      
+      While Statements
+      
+    </h2>
+    
+    
+    <p>No while statements found in the uploaded code.</p>
+    
+    
+  </section>
+  
+  <section id="try" class="doc-section">
+    <h2>
+      
+      Try Statements
+      
+    </h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          
+          <th>Caught Error Name</th>
+          
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>113</td>
+          
+          <td>e</td>
+          
+          <td>Handles the translation of code, including syntax validation, alias replacement, and execution with error handling.</td>
+          
+        </tr>
+        
+        <tr>
+          <td>174</td>
+          
+          <td>e</td>
+          
+          <td>Executes a block of translated code, handling potential errors.</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+    
+  </section>
+  
+  <section id="switch" class="doc-section">
+    <h2>
+      
+      Match Cases
+      
+    </h2>
+    
+    
+    <p>No Match Cases found in the uploaded code.</p>
+    
+    
+  </section>
+  
+  
+
+  
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.doc-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Magic to read the query param
+    function getFilenameFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('filename');
+    }
+
+    // 🪄 Store filename in a global variable (or hidden field)
+    const selectedFile = getFilenameFromURL();
+
+    function downloadHTML() {
+      if (!selectedFile) {
+        alert("No file selected to download HTML.");
+        return;
+      }
+      window.open('/download-html?filename=' + encodeURIComponent(selectedFile), '_blank');
+    }
+
+    function downloadPDF() {
+      if (!selectedFile) {
+        alert("No file selected to generate PDF.");
+        return;
+      }
+      window.open('/download-pdf?filename=' + encodeURIComponent(selectedFile), '_blank');
+    }
+  </script>
+
+</body>
+
+</html>
