@@ -31,19 +31,30 @@ def get_extension(filename):
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
+        print("🚀 Upload endpoint hit.")
+
         files = request.files.getlist("files")
+        print(f"📂 Received {len(files)} file(s)")
+
         parsed_data = []
 
         # 🌟 Unique ID for tracking this generation
         generation_id = str(uuid.uuid4())
+        print(f"🆔 Generated unique generation_id: {generation_id}")
+
         generation_status[generation_id] = "processing"
         generation_flags[generation_id] = "active"
 
         for file in files:
             filename = secure_filename(file.filename)
+            print(f"📝 Processing file: {filename}")
+
             file_ext = get_extension(filename)
+            print(f"📄 File extension: {file_ext}")
+
             file_path = os.path.join(UPLOAD_FOLDER, filename)
             file.save(file_path)
+            print(f"📥 File saved to: {file_path}")
 
             parsed = parse_file_by_type(
                 file_path,
@@ -51,21 +62,33 @@ def upload():
                 status=generation_status,
                 flags=generation_flags
             )
+
             if parsed:
+                print(f"✅ Successfully parsed {filename}")
                 parsed_data.append((filename, parsed, file_ext))
+            else:
+                print(f"⚠️ Failed to parse {filename} or returned None")
 
         if generation_flags[generation_id] == "cancelled":
+            print("🛑 Generation was flagged for cancellation.")
             raise Exception("Generation cancelled by user")
 
         html_filename = f"documentation_{generation_id}.html"
         html_path = os.path.join(DOC_FOLDER, html_filename)
+
+        print(f"📄 Generating HTML at: {html_path}")
         generate_html(parsed_data, html_path, hide_buttons=False)
-        
+
+        if os.path.exists(html_path):
+            print(f"🎉 HTML file successfully created: {html_path}")
+        else:
+            print(f"💥 HTML file NOT created: {html_path}")
+
         generation_status[generation_id] = "done"
 
         return jsonify({
             "success": True,
-            "htmlPath": f"/{html_filename}",
+            "htmlPath": f"/docs/{html_filename}",  # Use correct route
             "generation_id": generation_id
         })
 
