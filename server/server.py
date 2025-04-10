@@ -20,8 +20,8 @@ generation_status = {}
 generation_flags = {}
 generation_lock = Lock()
 
-UPLOAD_FOLDER = "server/static/uploads"
-DOC_FOLDER = "server/static/generated_docs"
+UPLOAD_FOLDER = "static/uploads"
+DOC_FOLDER = "static/generated_docs"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(DOC_FOLDER, exist_ok=True)
 
