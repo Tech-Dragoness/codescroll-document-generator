@@ -57,14 +57,15 @@ def upload():
         if generation_flags[generation_id] == "cancelled":
             raise Exception("Generation cancelled by user")
 
-        html_path = os.path.join(DOC_FOLDER, "documentation.html")
+        html_filename = f"documentation_{generation_id}.html"
+        html_path = os.path.join(DOC_FOLDER, html_filename)
         generate_html(parsed_data, html_path, hide_buttons=False)
         
         generation_status[generation_id] = "done"
 
         return jsonify({
             "success": True,
-            "htmlPath": "/documentation",
+            "htmlPath": f"/{html_filename}",
             "generation_id": generation_id
         })
 
