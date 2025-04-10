@@ -73,6 +73,13 @@ def upload():
         print("🐍 Backend Error:", traceback.format_exc())
         return jsonify({"success": False, "error": str(e)}), 500
     
+@app.route("/<filename>", methods=["GET"])
+def docs(filename):
+    html_path = os.path.join(DOC_FOLDER, filename)
+    if os.path.exists(html_path):
+        return send_file(html_path)
+    return "No documentation generated yet.", 404
+    
 @app.route("/generate-id")
 def generate_id():
     generation_id = str(uuid.uuid4())
