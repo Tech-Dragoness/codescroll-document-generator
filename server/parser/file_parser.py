@@ -887,27 +887,123 @@ def css_parser(path, generation_id=None, status=None, flags=None):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    raw_selectors = re.findall(r'([^{]+)\s*\{', content)
+    class_rules = []
+    id_rules = []
+    tag_rules = []
+    media_rules = []
 
-    class_selectors = []
-    id_selectors = []
-    tag_selectors = []
+    snippets_to_describe = []
+    types_to_describe = []
+    description_targets = []
+    all_rules_flat = []
 
-    for selector in raw_selectors:
-        parts = [s.strip() for s in selector.split(",") if s.strip()]
-        for part in parts:
-            if part.startswith("."):
-                class_selectors.append(part)
-            elif part.startswith("#"):
-                id_selectors.append(part)
-            elif part and re.match(r'^[a-zA-Z][\w\-]*$', part):
-                tag_selectors.append(part)
+    media_pattern = re.compile(r'@media\s*([^{]+)\{([\s\S]+?\})\s*\}', re.MULTILINE)
+    rule_pattern = re.compile(r'([^{]+)\s*{([^}]*)}', re.MULTILINE)
 
+    # 🌀 Parse @media queries
+    for match in media_pattern.finditer(content):
+        full_match = match.group(0)
+        condition = match.group(1).strip()
+        body = match.group(2).strip()
+        lineno = content[:match.start()].count('\n') + 1
+
+        nested_elements = []
+        for sel, props in rule_pattern.findall(body):
+            sel = sel.strip()
+            props = props.strip()
+            prop_lines = [line.strip() + ";" for line in props.split(";") if line.strip()]
+            nested_elements.append({
+                "selector": sel,
+                "properties": prop_lines
+            })
+
+        rule = {
+            "selector": f"@media {condition}",
+            "lineno": lineno,
+            "name": None,
+            "description": None,
+            "size": condition,
+            "elements": nested_elements  # A list of dicts
+        }
+
+        media_rules.append(rule)
+        snippets_to_describe.append(full_match)
+        types_to_describe.append("CSS media query")
+        description_targets.append(len(all_rules_flat))
+        all_rules_flat.append(rule)
+
+    # 🌟 Parse non-media CSS rules
+    non_media_content = media_pattern.sub('', content)
+    for match in rule_pattern.finditer(non_media_content):
+        selector = match.group(1).strip()
+        body = match.group(2).strip()
+        lineno = content[:match.start()].count('\n') + 1
+
+        elements = [line.strip() + ";" for line in body.split(";") if line.strip()]
+
+        rule = {
+            "selector": selector,
+            "lineno": lineno,
+            "name": selector[1:] if selector.startswith((".", "#")) else selector,
+            "description": None,
+            "elements": elements
+        }
+
+        if selector.startswith("."):
+            class_rules.append(rule)
+        elif selector.startswith("#"):
+            id_rules.append(rule)
+        else:
+            tag_rules.append(rule)
+
+        snippets_to_describe.append(f"{selector} {{ {body} }}")
+        types_to_describe.append("CSS rule")
+        description_targets.append(len(all_rules_flat))
+        all_rules_flat.append(rule)
+
+    # ✨ Describe in batches
+    if snippets_to_describe:
+        descriptions = []
+        batch_size = 25
+        cooldown = 10
+        total = len(snippets_to_describe)
+
+        for i in range(0, total, batch_size):
+            batch_snippets = snippets_to_describe[i:i + batch_size]
+            batch_types = types_to_describe[i:i + batch_size]
+
+            try:
+                batch_result = describe_snippet(batch_snippets, batch_types, generation_id=generation_id, status=status, flags=flags)
+            except Exception as e:
+                print(f"💥 Gemini failed on batch {i}: {e}")
+                batch_result = ["Failed to generate description"] * len(batch_snippets)
+
+            for j, desc in enumerate(batch_result):
+                if isinstance(desc, str) and "invalid syntax" in desc.lower():
+                    batch_result[j] = "Could not generate a valid description."
+
+            descriptions.extend(batch_result)
+
+            completed = min(i + batch_size, total)
+            if status is not None and generation_id is not None:
+                status[generation_id] = f"generating:{int((completed / total) * 100)}"
+
+            if i + batch_size < total:
+                time.sleep(cooldown)
+
+        for index, desc in zip(description_targets, descriptions):
+            all_rules_flat[index]["description"] = desc
+
+    # 🎁 Final grouped result
     result = {
-        "classes": [{"class": cls} for cls in sorted(set(class_selectors))],
-        "ids": [{"id": _id} for _id in sorted(set(id_selectors))],
-        "tags": [{"tag": tag} for tag in sorted(set(tag_selectors))]
+        "classes": class_rules,
+        "ids": id_rules,
+        "tags": tag_rules,
+        "media": media_rules
     }
+
+    with open(path + ".docjson", "w", encoding="utf-8") as f:
+        json.dump(result, f, indent=2)
 
     return result
 
@@ -936,6 +1032,8 @@ def generate_html(parsed_data, output_path, hide_buttons=False):
 
     # Check if we're dealing with HTML tags only
     is_html = any("html_tags" in data for _, data, _ in parsed_data)
+    # Check if we're dealing with HTML tags only
+    is_css = all("classes" in data and "ids" in data and "media" in data for _, data, _ in parsed_data)
 
     if is_html:
         # 🧚 Handle HTML-specific rendering
@@ -949,9 +1047,37 @@ def generate_html(parsed_data, output_path, hide_buttons=False):
         filename = parsed_data[0][0] if parsed_data else ""
         ext = parsed_data[0][2] if parsed_data else ""
 
-        clean_ext = ext.lstrip(".").title()
-        rendered = template.render(html_mode=True, tag_data=tag_data, tabs=tabs, filename=filename, ext=clean_ext)
+        clean_ext = ext.lstrip(".").upper()
+        rendered = template.render(html_mode=True, css_mode=False, tag_data=tag_data, tabs=tabs, filename=filename, ext=clean_ext)
 
+    elif is_css:
+        grouped_data = {
+            "Classes": [],
+            "IDs": [],
+            "Media Queries": []
+        }
+
+        for filename, data, ext in parsed_data:
+            grouped_data["Classes"].extend(data.get("classes", []))
+            grouped_data["IDs"].extend(data.get("ids", []))
+            grouped_data["Media Queries"].extend(data.get("media", []))
+
+        tabs = list(grouped_data.keys())  # "Classes", "IDs", "Media Queries"
+        filename = parsed_data[0][0] if parsed_data else ""
+        ext = parsed_data[0][2] if parsed_data else ""
+        extFullForm = ext.lstrip(".").upper()
+
+        rendered = template.render(
+            css_mode=True,
+            grouped_data=grouped_data,
+            tabs=tabs,
+            html_mode=False,
+            filename=filename,
+            ext=extFullForm,
+            ext_raw=ext,
+            hide_buttons=hide_buttons
+        )
+    
     else:
         # 🧑‍💻 Handle regular code parsing
         control_keywords = []
@@ -997,6 +1123,7 @@ def generate_html(parsed_data, output_path, hide_buttons=False):
             data=all_data,
             tabs=all_tabs,
             html_mode=False,
+            css_mode=False,
             filename=filename,
             ext=extFullForm,
             ext_raw=ext,

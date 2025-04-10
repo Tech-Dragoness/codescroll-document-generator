@@ -55,6 +55,24 @@ def to_camel_case(text):
 def strip_emojis(text):
     return re.sub(r'[^\x00-\x7F]+', '', text)
 
+def remove_css_comments(value):
+    if isinstance(value, str):
+        return re.sub(r'/\*.*?\*/', '', value, flags=re.DOTALL).strip()
+    elif isinstance(value, list):
+        return [remove_css_comments(item) for item in value]
+    elif isinstance(value, dict):
+        return {k: remove_css_comments(v) for k, v in value.items()}
+    return value  # If it's not a str/list/dict, return as-is
+
+def clean_section_comments(section):
+    cleaned = {}
+    for key, value in section.items():
+        if isinstance(value, list):
+            cleaned[key] = [remove_css_comments(item) for item in value]
+        else:
+            cleaned[key] = remove_css_comments(value)
+    return cleaned
+
 def convert_to_pdf_format(doc_data):
     # Mapping of internal keys to display-friendly names
     header_renames = {
@@ -62,11 +80,20 @@ def convert_to_pdf_format(doc_data):
         "lineno": "Line No.",
         "docstring": "Description",
     }
+    
+    css_sections = {"css", "media", "ids", "classes"}
+    
+    styles = getSampleStyleSheet()
+    normal = styles["Normal"]
 
     converted = []
 
     for section in doc_data:
+        section = clean_section_comments(section)
         for title, content in section.items():
+            if title == "tags":
+                print(f"🔕 Skipping 'tags' section.")
+                continue  # Skip processing for 'tags'
             if title.strip().lower() == "with":
                 continue
 
@@ -129,8 +156,15 @@ def convert_to_pdf_format(doc_data):
 
             elif isinstance(content, list):
                 raw_keys = list(content[0].keys()) if content else []
-                styles = getSampleStyleSheet()
-                normal = styles["Normal"]
+                
+                # 🧙 If any item has 'elements', make sure to include it as a column
+                if any("elements" in item for item in content):
+                     if "elements" not in raw_keys:
+                        raw_keys.append("elements")
+                
+                if title.strip().lower() in ["classes", "ids", "media"]:
+                    print(f"🔥 Removing 'selector' from {title}")
+                    raw_keys = [k for k in raw_keys if k.lower() != "selector"]
 
                 # Reorder for classes/functions
                 first = [k for k in raw_keys if k == "lineno"]
@@ -152,8 +186,38 @@ def convert_to_pdf_format(doc_data):
                             )
                             value = Paragraph(methods_text, normal)
                         else:
-                            value = Paragraph(html.escape(strip_emojis(str(item.get(key, "")))), normal)
-    
+                            print("Using else block!!!")
+                            cell_value = item.get(key, "")
+
+                            if title.strip().lower() in css_sections and key.lower() == "properties":
+                                # 🌸 Format CSS properties to be multiline and indented
+                                formatted = "<br/>".join(
+                                    f"&nbsp;&nbsp;{html.escape(line.strip())}"
+                                    for line in str(cell_value).split(";") if line.strip()
+                                )
+                                value = Paragraph(formatted, normal)
+
+                            elif key.lower() == "elements":
+                                print("elements is ",key)
+                                # ✨ Format 'elements' into styled CSS-like block chunks
+                                lines = []
+                                if isinstance(cell_value, list):
+                                    for el in cell_value:
+                                        if isinstance(el, dict) and "selector" in el and "properties" in el:
+                                            lines.append(f"<b>{html.escape(el['selector'])}</b> &#123;")
+                                            for prop in el["properties"]:
+                                                lines.append(f"&nbsp;&nbsp;{html.escape(prop.strip())}")
+                                            lines.append("&#125;<br/>")
+                                        else:
+                                            lines.append(html.escape(str(el).strip()))
+                                    formatted = "<br/>".join(lines)
+                                    value = Paragraph(formatted, normal)
+                                else:
+                                    value = Paragraph(html.escape(strip_emojis(str(cell_value))), normal)
+
+                            else:
+                                value = Paragraph(html.escape(strip_emojis(str(cell_value))), normal)
+
                         row.append(value)
                     items.append(row)
 

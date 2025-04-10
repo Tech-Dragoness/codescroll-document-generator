@@ -186,7 +186,7 @@
     <h1>📘 {{ext}} Code Documentation</h1>
   </header>
 
-  {% if not html_mode %}
+  {% if not html_mode and not css_mode %}
   <nav>
     <ul>
       <li><a href="#" onclick="showSection('toc')">🏠 Table of Contents</a></li>
@@ -385,8 +385,10 @@
       {% for tag in tag_data.keys() %}
       <li><a href="#" onclick="showSection('tag-{{ tag }}')">🔖 &lt;{{ tag }}&gt;</a></li>
       {% endfor %}
+      {% if not hide_buttons %}
       <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
       <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+      {% endif %}
     </ul>
   </nav>
 
@@ -437,6 +439,94 @@
     </table>
     {% else %}
     <p>No &lt;{{ tag }}&gt; elements found in the uploaded code.</p>
+    {% endif %}
+  </section>
+  {% endfor %}
+
+  {% endif %}
+
+  {% if css_mode %}
+
+  <!-- 🎨 Navigation for CSS -->
+  <nav>
+    <ul>
+      <li><a href="#" onclick="showSection('css-toc')">🏠 Table of Contents</a></li>
+      {% for tab in tabs %}
+      {% set safe_id = 'tab-' + tab|lower|replace(' ', '_') %}
+      <li><a href="#" onclick="showSection('{{ safe_id }}')">🎯 {{ tab }}</a></li>
+      {% endfor %}
+      {% if not hide_buttons %}
+      <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
+      <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- 🏠 CSS Table of Contents -->
+  <section id="css-toc" class="doc-section active">
+    <h2>🏠 Table of Contents</h2>
+    <div class="toc-box">
+      <ul>
+        {% for tab in tabs %}
+        {% set safe_id = 'tab-' + tab|lower|replace(' ', '_') %}
+        <li><a href="#" onclick="showSection('{{ safe_id }}')">🎯 {{ tab }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 📄 One section per CSS category -->
+  {% for tab in tabs %}
+  <section id="tab-{{ tab|lower|replace(' ', '_') }}" class="doc-section">
+    <h2>🎯 {{ tab }}</h2>
+    {% if grouped_data[tab] %}
+    <table>
+      <thead>
+        <tr>
+          <th>Line No.</th>
+          {% if tab != 'Media Queries' %}
+          <th>Name</th> <!-- ✨ New column for Classes and IDs -->
+          <th>Elements</th>
+          {% else %}
+          <th>Size</th>
+          <th>Elements</th>
+          {% endif %}
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rule in grouped_data[tab] %}
+        <tr>
+          <td>{{ rule.lineno or '—' }}</td>
+          {% if tab != 'Media Queries' %}
+          <td>{{ rule.name or '—' }}</td>
+          <td>
+            {% for el in rule.elements %}
+            <div>{{ el }}</div>
+            {% endfor %}
+          </td>
+          {% else %}
+          <td>{{ rule.size or '—' }}</td>
+          <td>
+            {% for el in rule.elements %}
+            <div style="margin-bottom: 0.5em;">
+              <strong>{{ el.selector }}</strong>
+              <ul style="margin-left: 1em;">
+                {% for prop in el.properties %}
+                <li>{{ prop }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endfor %}
+          </td>
+          {% endif %}
+          <td>{{ rule.description or '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>No {{ tab }} found in the uploaded code.</p>
     {% endif %}
   </section>
   {% endfor %}

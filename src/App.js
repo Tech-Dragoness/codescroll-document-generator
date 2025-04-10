@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Card, CardContent } from "./components/ui/card";
@@ -13,6 +13,8 @@ export default function App() {
   const [loadingStage, setLoadingStage] = useState("Preparing magic...");
   const [progressPercent, setProgressPercent] = useState(0);
   const [generationId, setGenerationId] = useState(null); // 🪄 Track current generation task
+  const emojiList = ["🧚‍♀️", "🐉", "📜", "✨", "🪄", "🌸", "📦", "⚙️", "🧠"];
+  const [currentEmoji, setCurrentEmoji] = useState(emojiList[0]);
 
   const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
@@ -72,7 +74,7 @@ export default function App() {
     setProgressPercent(0);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!generationId) return;
 
     const interval = setInterval(async () => {
@@ -102,6 +104,20 @@ export default function App() {
 
     return () => clearInterval(interval);
   }, [generationId]);
+
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const interval = setInterval(() => {
+      setCurrentEmoji((prevEmoji) => {
+        const currentIndex = emojiList.indexOf(prevEmoji);
+        const nextIndex = (currentIndex + 1) % emojiList.length;
+        return emojiList[nextIndex];
+      });
+    }, 1000); // change every second (can tweak)
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -255,7 +271,9 @@ export default function App() {
                 ×
               </button>
 
-              <div className="text-3xl mb-4 animate-bounce">🧚‍♀️</div>
+              <div className="text-3xl mb-4 animate-bounce transition-opacity duration-300 ease-in-out">
+                {currentEmoji}
+              </div>
               <p className="font-bold text-lg text-purple-700 mb-2">{loadingStage}</p>
 
               <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-3">
