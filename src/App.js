@@ -15,34 +15,45 @@ export default function App() {
   const [generationId, setGenerationId] = useState(null); // 🪄 Track current generation task
   const emojiList = ["🧚‍♀️", "🐉", "📜", "✨", "🪄", "🌸", "📦", "⚙️", "🧠"];
   const [currentEmoji, setCurrentEmoji] = useState(emojiList[0]);
+  const [batchSize, setBatchSize] = useState(20); // default is in the middle
 
   const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
   const handleUpload = async () => {
     setIsLoading(true);
-    setLoadingStage("🧃 Processing your file...");
+    // Start truly at 0%
+    setProgressPercent(0);
+    setLoadingStage("🧃 Preparing to process...");
+
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    // Intermittent stage at 10%
+    setLoadingStage("🌼 Reading your files...");
     setProgressPercent(10);
+
+    await new Promise((resolve) => setTimeout(resolve, 400));
 
     const formData = new FormData();
     files.forEach((file) => formData.append("files", file));
 
     try {
-      // Let’s simulate stages
-      setTimeout(() => {
-        setLoadingStage("🔍 Splitting into batches...");
-        setProgressPercent(30);
-      }, 500);
+      // Step 1: Splitting into batches
+      setLoadingStage("🔍 Splitting into batches...");
+      setProgressPercent(30);
 
-      setTimeout(() => {
-        setLoadingStage("📡 Sending batches to AI...");
-        setProgressPercent(60);
-      }, 1200);
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Small pause for animation effect
+
+      // Step 2: Sending batches to AI
+      setLoadingStage("📡 Sending batches to AI...");
+      setProgressPercent(60);
 
       // 🌟 Get a unique generation ID from backend
       const idRes = await fetch(`${API_BASE}/generate-id`);
       const { generation_id } = await idRes.json();
       setGenerationId(generation_id);
       formData.append("generation_id", generation_id);
+
+      formData.append("batch_size", batchSize);
 
       const response = await fetch(`${API_BASE}/upload`, {
         method: "POST",
@@ -54,13 +65,27 @@ export default function App() {
 
       const result = await response.json();
 
-      setIsLoading(false);
-      setProgressPercent(100);
+      // Handle cancellation or failure
+      if (!response.ok || !result.success) {
+        setIsLoading(false);
+        setProgressPercent(0);
 
-      if (!result.success) {
-        console.error("Backend error:", result.error);
+        if (result?.error === "Generation cancelled by user") {
+          alert("❌ You cancelled the generation.");
+        } else {
+          console.error("Backend error:", result?.error || "Unknown error");
+        }
         return;
       }
+
+      // Step 3: Finalizing
+      setLoadingStage("✨ Finalizing and rendering docs...");
+      setProgressPercent(90);
+
+      await new Promise((resolve) => setTimeout(resolve, 400)); // Optional pause for dramatic effect
+
+      setProgressPercent(100);
+      setIsLoading(false);
 
       const filenameParam = encodeURIComponent(files[0].name);
       const docURL = `${API_BASE}${result.htmlPath}?filename=${filenameParam}`;
@@ -155,28 +180,6 @@ export default function App() {
     event.preventDefault();
   };
 
-  const processFiles = (selectedFiles) => {
-    setFiles(selectedFiles);
-    setFileNames(selectedFiles.map(file => file.name));
-
-    const badFiles = selectedFiles.filter(file => {
-      const ext = "." + file.name.split(".").pop().toLowerCase();
-      return !allowedExtensions.includes(ext);
-    });
-
-    if (selectedFiles.length === 0) {
-      setValidSelection(false);
-      setExtensions("Allowed extensions: " + allowedExtensions.join(", "));
-    } else if (badFiles.length > 0) {
-      setValidSelection(false);
-      setExtensions(`❌ Unsupported file extension(s): ${badFiles.map(f => "." + f.name.split(".").pop().toLowerCase()).join(", ")}`);
-    } else {
-      setValidSelection(true);
-      const extList = selectedFiles.map(f => "." + f.name.split(".").pop().toLowerCase());
-      setExtensions("📂 Selected file's extension: " + [...new Set(extList)].join(", "));
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white flex flex-col">
       {/* 🌟 Title at the top */}
@@ -247,6 +250,63 @@ export default function App() {
             )}
           </div>
 
+          <div className="magic-glow-border rounded-xl">
+            <div className="bg-white/30 backdrop-blur-md px-2 py-1 rounded-lg shadow-inner text-black relative">
+              <div className="text-s text-white text-center font-semibold leading-tight flex items-center justify-center gap-1">
+                ✨ Batch-Size: {batchSize}
+
+                {/* Info Button with group */}
+                <div className="relative ml-2 group"
+                >
+                  {/* Blue info circle */}
+                  <div
+                    className="w-5 h-5 rounded-full bg-blue-500 text-white text-[10px] font-bold flex items-center justify-center cursor-pointer hover:scale-105 transition-all"
+                    style={{ border: "2px dashed limegreen" }}
+                  >
+                    i
+                  </div>
+
+                  {/* Tooltip */}
+                  <div
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 bg-black bg-opacity-80 text-white text-xs px-3 py-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[9999]"
+                    style={{
+                      pointerEvents: "none", // prevent stealing hover
+                      border: "1px dashed magenta"
+                    }}
+                  >
+                    We use AI-generated descriptions to describe snippets of your code. For this, we send snippets of your code in batches to the AI. This bar controls how many snippets are sent to the AI at once. Lower values improve accuracy but take longer, while higher ones speed things up but can increase chances of inaccuracies.
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider */}
+              <input
+                type="range"
+                min="5"
+                max="40"
+                step="1"
+                value={batchSize}
+                onChange={(e) => setBatchSize(parseInt(e.target.value))}
+                className="w-full appearance-none rounded-full mt-0.5 mb-0.5"
+                style={{
+                  height: "6px",
+                  background: `linear-gradient(to right, #0ea5e9 0%, #f43f5e ${((batchSize - 5) / (40 - 5)) * 100
+                    }%, #e5e7eb ${(batchSize - 5) / (40 - 5) * 100}%, #e5e7eb 100%)`,
+                  boxShadow: "0 0 4px rgba(255, 255, 255, 0.3)",
+                }}
+              />
+
+              {/* Descriptor */}
+              <div className="text-[15px] text-white text-center italic leading-snug">
+                {batchSize <= 10
+                  ? "🎯 Accurate"
+                  : batchSize >= 35
+                    ? "⚡ Fast"
+                    : "✨ Balanced"}
+              </div>
+            </div>
+          </div>
+
           {/* Example using Tailwind + Poppins (Google Fonts)*/}
           <Button
             onClick={handleUpload}
@@ -264,7 +324,13 @@ export default function App() {
                 onClick={() => {
                   setIsLoading(false);
                   if (generationId) {
-                    fetch(`${API_BASE}/cancel-generation/${generationId}`);
+                    fetch(`${API_BASE}/cancel-generation`, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify({ generation_id: generationId })
+                    });
                   }
                 }}
               >

@@ -32,69 +32,59 @@ def get_extension(filename):
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
-        print("🚀 Upload endpoint hit.", flush=True)
-
         files = request.files.getlist("files")
-        print(f"📂 Received {len(files)} file(s)", flush=True)
-
         parsed_data = []
 
         # 🌟 Unique ID for tracking this generation
-        generation_id = str(uuid.uuid4())
-        print(f"🆔 Generated unique generation_id: {generation_id}", flush=True)
-
+        generation_id = request.form.get("generation_id") or str(uuid.uuid4())
         generation_status[generation_id] = "processing"
         generation_flags[generation_id] = "active"
 
+        batch_size = request.form.get("batch_size", type=int) or 5
+
         for file in files:
+            # 🛑 Check before starting this file
+            if generation_flags.get(generation_id) == "cancelled":
+                raise Exception("Generation cancelled by user before parsing")
+
             filename = secure_filename(file.filename)
-            print(f"📝 Processing file: {filename}", flush=True)
-
             file_ext = get_extension(filename)
-            print(f"📄 File extension: {file_ext}", flush=True)
-
             file_path = os.path.join(UPLOAD_FOLDER, filename)
             file.save(file_path)
-            print(f"📥 File saved to: {file_path}", flush=True)
 
             parsed = parse_file_by_type(
                 file_path,
                 generation_id=generation_id,
                 status=generation_status,
-                flags=generation_flags
+                flags=generation_flags,
+                batch_size=batch_size
             )
 
+            # 🛑 Check again after parsing (if user cancelled mid-descriptions)
+            if generation_flags.get(generation_id) == "cancelled":
+                raise Exception("Generation cancelled by user during parsing")
+
             if parsed:
-                print(f"✅ Successfully parsed {filename}", flush=True)
                 parsed_data.append((filename, parsed, file_ext))
-            else:
-                print(f"⚠️ Failed to parse {filename} or returned None", flush=True)
 
+        # 🛑 Final pre-check before generating doc
         if generation_flags[generation_id] == "cancelled":
-            print("🛑 Generation was flagged for cancellation.", flush=True)
-            raise Exception("Generation cancelled by user")
+            raise Exception("Generation cancelled before HTML creation")
 
-        html_filename = f"documentation_{generation_id}.html"
-        html_path = os.path.join(DOC_FOLDER, html_filename)
-
-        print(f"📄 Generating HTML at: {html_path}", flush=True)
+        html_path = os.path.join(DOC_FOLDER, "documentation.html")
         generate_html(parsed_data, html_path, hide_buttons=False)
-
-        if os.path.exists(html_path):
-            print(f"🎉 HTML file successfully created: {html_path}", flush=True)
-        else:
-            print(f"💥 HTML file NOT created: {html_path}", flush=True)
 
         generation_status[generation_id] = "done"
 
         return jsonify({
             "success": True,
-            "htmlPath": f"/docs/{html_filename}",  # Use correct route
+            "htmlPath": "/documentation",
             "generation_id": generation_id
         })
 
     except Exception as e:
-        print("🐍 Backend Error:", traceback.format_exc(), flush=True)
+        print("🐍 Backend Error:", traceback.format_exc())
+        generation_status[generation_id] = "cancelled"
         return jsonify({"success": False, "error": str(e)}), 500
     
 @app.route("/generate-id")
@@ -117,8 +107,6 @@ def cancel_generation():
     if generation_id in generation_flags:
         generation_flags[generation_id] = "cancelled"
         generation_status[generation_id] = "cancelled"  # Also update status
-
-        print(f"❌ Generation {generation_id} flagged for cancellation")
 
         # 💣 Optionally delete any partial docs
         try:

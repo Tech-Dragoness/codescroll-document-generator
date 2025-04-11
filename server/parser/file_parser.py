@@ -11,7 +11,7 @@ import json
 import time  # 🕰️ For spacing requests
 
 # 🐍 Python parser
-def parse_python_file(path, generation_id=None, status=None, flags=None):
+def parse_python_file(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
         tree = ast.parse(content)
@@ -122,8 +122,7 @@ def parse_python_file(path, generation_id=None, status=None, flags=None):
     # 🌟 Describe in safe spaced-out batches
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, total, batch_size):
@@ -168,7 +167,7 @@ def attach_parents(node, parent=None):
         child.parent = parent
         attach_parents(child, child)
 
-def js_parser(path, generation_id=None, status=None, flags=None):
+def js_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -302,8 +301,7 @@ def js_parser(path, generation_id=None, status=None, flags=None):
     # ✨ Ask Gemini in batches with cooldown and progress
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, total, batch_size):
@@ -364,7 +362,7 @@ def extract_condition_block(content, start_index):
             break
     return condition.strip('()')
 
-def java_parser(path, generation_id=None, status=None, flags=None):
+def java_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -489,8 +487,7 @@ def java_parser(path, generation_id=None, status=None, flags=None):
     # ✨ Ask Gemini in batches with progress
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, total, batch_size):
@@ -564,7 +561,7 @@ def extract_brace_block(text, start_index):
         i += 1
     return text[start_index:i], i  # block text, next index
     
-def cpp_parser(path, generation_id=None, status=None, flags=None):
+def cpp_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -750,8 +747,7 @@ def cpp_parser(path, generation_id=None, status=None, flags=None):
     # 🔮 Fetch descriptions in spaced-out batches
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, total, batch_size):
@@ -798,7 +794,7 @@ def cpp_parser(path, generation_id=None, status=None, flags=None):
 
     return result
 
-def html_parser(path, generation_id=None, status=None, flags=None):
+def html_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -841,8 +837,7 @@ def html_parser(path, generation_id=None, status=None, flags=None):
     # 🌟 Describe in safe spaced-out batches
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, len(snippets_to_describe), batch_size):
@@ -883,7 +878,7 @@ def html_parser(path, generation_id=None, status=None, flags=None):
 
     return result
 
-def css_parser(path, generation_id=None, status=None, flags=None):
+def css_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -964,8 +959,7 @@ def css_parser(path, generation_id=None, status=None, flags=None):
     # ✨ Describe in batches
     if snippets_to_describe:
         descriptions = []
-        batch_size = 25
-        cooldown = 10
+        cooldown = 5
         total = len(snippets_to_describe)
 
         for i in range(0, total, batch_size):
@@ -1007,21 +1001,21 @@ def css_parser(path, generation_id=None, status=None, flags=None):
 
     return result
 
-def parse_file_by_type(file_path, generation_id=None, status=None, flags=None):
+def parse_file_by_type(file_path, generation_id=None, status=None, flags=None, batch_size=5):
     ext = os.path.splitext(file_path)[1].lower()
 
     if ext == ".py":
-        return parse_python_file(file_path, generation_id=generation_id, status=status, flags=flags)
+        return parse_python_file(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     elif ext == ".java":
-        return java_parser(file_path, generation_id=generation_id, status=status, flags=flags)
+        return java_parser(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     elif ext == ".cpp":
-        return cpp_parser(file_path, generation_id=generation_id, status=status, flags=flags)
+        return cpp_parser(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     elif ext == ".js":
-        return js_parser(file_path, generation_id=generation_id, status=status, flags=flags)
+        return js_parser(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     elif ext in [".html", ".htm"]:
-        return html_parser(file_path, generation_id=generation_id, status=status, flags=flags)
+        return html_parser(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     elif ext == ".css":
-        return css_parser(file_path, generation_id=generation_id, status=status, flags=flags)
+        return css_parser(file_path, generation_id=generation_id, status=status, flags=flags, batch_size=batch_size)
     else:
         return None
 

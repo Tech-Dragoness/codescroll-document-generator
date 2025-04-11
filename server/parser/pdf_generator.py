@@ -73,13 +73,15 @@ def clean_section_comments(section):
             cleaned[key] = remove_css_comments(value)
     return cleaned
 
-def convert_to_pdf_format(doc_data):
+def convert_to_pdf_format(doc_data, ext=None):
     # Mapping of internal keys to display-friendly names
     header_renames = {
         "attrs": "Attributes",
         "lineno": "Line No.",
         "docstring": "Description",
     }
+    print("doc_data: ", doc_data)
+    print("ext: ", ext)
     
     css_sections = {"css", "media", "ids", "classes"}
     
@@ -99,8 +101,12 @@ def convert_to_pdf_format(doc_data):
 
             if isinstance(content, dict):  # Control flows or HTML tags
                 for keyword, items in content.items():
+                    print("keywords: ", keyword)
                     if keyword.strip().lower() == "with":
                         continue
+                    if keyword.strip().lower() == "switch" and ext == "Python":
+                        print("✨ Renaming 'switch' to 'match' in keyword")
+                        keyword = "Match"
 
                     tag_name = keyword.strip().lower()
 
@@ -163,7 +169,6 @@ def convert_to_pdf_format(doc_data):
                         raw_keys.append("elements")
                 
                 if title.strip().lower() in ["classes", "ids", "media"]:
-                    print(f"🔥 Removing 'selector' from {title}")
                     raw_keys = [k for k in raw_keys if k.lower() != "selector"]
 
                 # Reorder for classes/functions
@@ -173,6 +178,13 @@ def convert_to_pdf_format(doc_data):
 
                 ordered_keys = first + middle + last
                 headers = [header_renames.get(k, k.title()) for k in ordered_keys]
+                
+                print ("headers: ", headers)
+                
+                # 🧙 Rename 'switch' to 'match' for Python files
+                if ext == ".py" and title.strip().lower() == "switch":
+                    print("🪄 Replacing 'switch' with 'match' in list section")
+                    title = "match"
 
                 items = []
                 for item in content:
