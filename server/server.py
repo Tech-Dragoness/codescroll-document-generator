@@ -88,6 +88,7 @@ def upload():
 
     except Exception as e:
         print("🐍 Backend Error:", traceback.format_exc(), flush=True)
+        generation_status[generation_id] = "cancelled"
         return jsonify({"success": False, "error": str(e)}), 500
     
 @app.route("/generate-id")

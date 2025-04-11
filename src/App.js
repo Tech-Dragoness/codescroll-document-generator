@@ -60,9 +60,6 @@ export default function App() {
         body: formData,
       });
 
-      setLoadingStage("✨ Finalizing and rendering docs...");
-      setProgressPercent(90);
-
       const result = await response.json();
 
       // Handle cancellation or failure
