@@ -14,7 +14,9 @@ import uuid
 import time
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": [
+    "https://codescroll-document-generator-tech-dragoness-projects.vercel.app"
+]}})
 
 generation_status = {}
 generation_flags = {}
