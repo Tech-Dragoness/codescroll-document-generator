@@ -161,6 +161,8 @@ def download_pdf():
         filename = request.args.get("filename")
         if not filename:
             return jsonify({"success": False, "error": "No filename provided"}), 400
+        
+        ext = request.args.get("ext", None)
 
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         if not os.path.isfile(file_path):
@@ -180,7 +182,7 @@ def download_pdf():
                 json.dump(parsed, f, indent=2)
 
         parsed_data = [(filename, parsed)]  # ✅ Only this file
-        formatted_data = convert_to_pdf_format([parsed])  # 🎯 Just the current one
+        formatted_data = convert_to_pdf_format([parsed], ext=ext)  # 🎯 Just the current one
 
         output_path = os.path.join(DOC_FOLDER, "documentation.pdf")
         generate_pdf(formatted_data, output_path, filename)
