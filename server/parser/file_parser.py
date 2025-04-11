@@ -141,6 +141,12 @@ def parse_python_file(path, generation_id=None, status=None, flags=None, batch_s
             completed = min(i + batch_size, total)
             progress = int((completed / total) * 100)
             status[generation_id] = f"generating:{progress}"
+            
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
 
             if completed < total:
                 time.sleep(cooldown)
@@ -319,6 +325,12 @@ def js_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
             completed = min(i + batch_size, total)
             progress = int((completed / total) * 100)
             status[generation_id] = f"generating:{progress}"
+            
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
 
             if completed < total:
                 time.sleep(cooldown)
@@ -505,6 +517,12 @@ def java_parser(path, generation_id=None, status=None, flags=None, batch_size=5)
             completed = min(i + batch_size, total)
             progress = int((completed / total) * 100)
             status[generation_id] = f"generating:{progress}"
+            
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
 
             if completed < total:
                 time.sleep(cooldown)
@@ -767,6 +785,12 @@ def cpp_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
             progress = int((completed / total) * 100)
             status[generation_id] = f"generating:{progress}"
 
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
+
             if completed < total:
                 time.sleep(cooldown)
 
@@ -861,6 +885,12 @@ def html_parser(path, generation_id=None, status=None, flags=None, batch_size=5)
             completed = min(i + batch_size, total)
             progress = int((completed / total) * 100)
             status[generation_id] = f"generating:{progress}"
+            
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
 
             # 💤 Respect Gemini's cooldown if needed
             if i + batch_size < len(snippets_to_describe):
@@ -981,6 +1011,12 @@ def css_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
             completed = min(i + batch_size, total)
             if status is not None and generation_id is not None:
                 status[generation_id] = f"generating:{int((completed / total) * 100)}"
+                
+            # 🛑 Check for cancellation right here!
+            if flags and flags.get(generation_id) == "cancelled":
+                status[generation_id] = "cancelled"
+                print(f"🛑 Generation {generation_id} was cancelled.")
+                return {"cancelled": True}
 
             if i + batch_size < total:
                 time.sleep(cooldown)
