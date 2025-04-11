@@ -16,7 +16,14 @@ import time
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": [
     "https://codescroll-document-generator-tech-dragoness-projects.vercel.app"
-]}})
+]}}, supports_credentials=True)
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "https://codescroll-document-generator-tech-dragoness-projects.vercel.app"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+    return response    
 
 generation_status = {}
 generation_flags = {}
