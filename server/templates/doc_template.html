@@ -207,7 +207,7 @@
       <li><a href="#" onclick="showSection('try')">🛡️ Try</a></li>
       {% if not hide_buttons %}
       <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
-      <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+      <li><a href="#" onclick="downloadPDF('{{ext}}')">📥 Download PDF</a></li>
       {% endif %}
     </ul>
   </nav>
@@ -391,7 +391,7 @@
       {% endfor %}
       {% if not hide_buttons %}
       <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
-      <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+      <li><a href="#" onclick="downloadPDF('{{ext}}')">📥 Download PDF</a></li>
       {% endif %}
     </ul>
   </nav>
@@ -461,7 +461,7 @@
       {% endfor %}
       {% if not hide_buttons %}
       <li><a href="#" onclick="downloadHTML()">📄 Download HTML</a></li>
-      <li><a href="#" onclick="downloadPDF()">📥 Download PDF</a></li>
+      <li><a href="#" onclick="downloadPDF('{{ext}}')">📥 Download PDF</a></li>
       {% endif %}
     </ul>
   </nav>
@@ -561,12 +561,15 @@
       window.open('/download-html?filename=' + encodeURIComponent(selectedFile), '_blank');
     }
 
-    function downloadPDF() {
+    function downloadPDF(ext) {
       if (!selectedFile) {
         alert("No file selected to generate PDF.");
         return;
       }
-      window.open('/download-pdf?filename=' + encodeURIComponent(selectedFile), '_blank');
+      window.open(
+        '/download-pdf?filename=' + encodeURIComponent(selectedFile) + '&ext=' + encodeURIComponent(ext),
+        '_blank'
+      );
     }
   </script>
 
