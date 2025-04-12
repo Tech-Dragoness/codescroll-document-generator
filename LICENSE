@@ -13,12 +13,13 @@ This software and website (the "Platform") is provided for educational purposes 
    - Use the Platform for any commercial purposes without express permission.
    - Reproduce, redistribute, or sublicense the Platform's code.
 
-3. Data Collection and Usage  
-   By uploading code or interacting with the Platform, you consent to the collection and storage of the following data:
+3. Data Collection and Usage
+   - By uploading code or interacting with the Platform, you consent to the collection and storage of the following data:
    - The code you upload to the Platform.
-   - The generated documentation, HTML, PDF and related output files.
-   
-   This data will ONLY be used for improving the Platform and enhancing its services. It will NOT be shared with third parties without your consent. You acknowledge that, while your code and documents may be stored, they will not be used for any other purposes unless explicitly stated.
+   - The generated documentation, HTML, PDF, and related output files.
+   - The code hosted in the Platform's GitHub repository as part of the platform's publicly available source code. This includes user-uploaded code and the corresponding generated files (documentation, HTML, PDFs) which will be made publicly visible in the GitHub repository.
+
+This data will ONLY be used for improving the Platform and enhancing its services. It will NOT be shared with third parties without your consent. You acknowledge that, while your code and documents may be stored, they will be visible to the public via the GitHub repository and will not be used for any other purposes unless explicitly stated.
 
 4. No Warranty  
    The Platform is provided "as is" and without any warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or non-infringement. The authors or copyright holders shall not be liable for any claims, damages, or other liabilities arising from or in connection with the use of the Platform.
