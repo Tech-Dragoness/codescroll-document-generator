@@ -1,7 +1,7 @@
 # About This Website
 This website is a code documentation generator designed for educational purposes. It allows users to upload code files, which are then analyzed to generate structured documentation. Supported file types include Python, C++, Java, JavaScript, HTML, and CSS. The generated documentation is presented in a clean and organized format, making it easy to explore and understand your code.
 
-The website uses AI-powered analysis to generate descriptions for code snippets, providing more detailed explanations of the code logic and structure, making it easier to understand.
+The website uses AI-powered analysis (powered by the Gemini API) to generate descriptions for code snippets, providing more detailed explanations of the code logic and structure, making it easier to understand.
 
 Additionally, this tool supports batch processing of code for enhanced workflow, enabling users to generate documentation in real time. Users can download their documentation in both HTML and PDF formats.
 
@@ -21,3 +21,6 @@ Your uploaded code and generated documents will be publicly available in this Gi
 
 ### Consent to Data Collection: 
 By uploading code and using the website, you agree to the collection and usage of your data as described above. If you do not consent to this data collection, please refrain from using the website.
+
+### Powered by Gemini AI:
+This platform utilizes the Gemini API to power its AI-based code analysis and documentation generation features. For more information on the Gemini API and its terms of use, please refer to Gemini's official documentation.
