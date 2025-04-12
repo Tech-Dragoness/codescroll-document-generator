@@ -4,18 +4,19 @@ This software and website (the "Platform") is provided for educational purposes 
 
 1. Educational Use Only  
    The Platform is intended solely for non-commercial, educational purposes. You may only use the Platform for learning, testing, and experimenting with code. Commercial usage, redistribution, or deployment of the Platform is strictly prohibited.
+   The original author retains full rights to deploy, modify, and distribute the Platform.
 
 2. Prohibited Activities  
    You may NOT:
    - Copy, modify, or distribute the source code of the Platform without explicit written permission from the copyright holder.
-   - Create derivative works based on the Platform’s code or functionality.
+   - Copy, modify, or create derivative works based on the Platform’s proprietary code, design, or structure. While the concept may be common, this specific implementation is protected.
    - Use the Platform for any commercial purposes without express permission.
    - Reproduce, redistribute, or sublicense the Platform's code.
 
 3. Data Collection and Usage  
    By uploading code or interacting with the Platform, you consent to the collection and storage of the following data:
    - The code you upload to the Platform.
-   - The generated documentation, HTML, and related output files.
+   - The generated documentation, HTML, PDF and related output files.
    
    This data will ONLY be used for improving the Platform and enhancing its services. It will NOT be shared with third parties without your consent. You acknowledge that, while your code and documents may be stored, they will not be used for any other purposes unless explicitly stated.
 
@@ -25,7 +26,7 @@ This software and website (the "Platform") is provided for educational purposes 
 5. Acceptance  
    By using the Platform, you acknowledge that you have read, understood, and agree to comply with these terms. If you do not agree to these terms, you should not use the Platform.
 
-For permission requests or any other inquiries, please raise an issue in the GitHub repository.
+For permission requests or any other inquiries, please raise an issue in this GitHub repository.
 
 ---
 
