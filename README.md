@@ -13,11 +13,11 @@ This project is licensed under the **Custom Educational License**. See the full 
 ### Educational Use Only: 
 This website is intended for educational purposes only. It is designed to help users learn about code documentation and to improve their understanding of different programming languages and their structures.
 
-### Data Collection and Usage: 
-By using this website, you acknowledge and consent that any code uploaded and the resulting documentation (including HTML and PDF files) may be stored on our servers. The data will solely be used to improve the website’s functionality, performance, and user experience.
+### Data Collection and Usage:
+By using this website, you acknowledge and consent that any code uploaded and the resulting documentation (including HTML and PDF files) may be stored on our servers and will be publicly accessible in this GitHub repository. This data will solely be used to improve the website’s functionality, performance, and user experience. We will not share your data with third parties without your explicit consent.
 
-### Privacy Assurance: 
-We do not use your data for any other purposes, and we will not share your data with third parties. Your uploaded code and generated documents are strictly used to enhance the services provided by this website.
+### Privacy Assurance:
+Your uploaded code and generated documents will be publicly available in this GitHub repository and can be accessed by anyone who visits it. All data is stored securely within the repository and will remain visible there unless stated otherwise. We do not use your data for any purposes other than enhancing the services provided by this website.
 
 ### Consent to Data Collection: 
 By uploading code and using the website, you agree to the collection and usage of your data as described above. If you do not consent to this data collection, please refrain from using the website.
