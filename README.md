@@ -1,5 +1,5 @@
 # About This Website
-This website is a code documentation generator designed for educational purposes. It allows users to upload code files, which are then parsed to generate structured documentation. Supported file types include Python, C++, Java, JavaScript, HTML, and CSS. The generated documentation is presented in a clean and organized format, making it easy to explore and understand your code.
+This website is a code documentation generator designed for educational purposes. It allows users to upload code files, which are then analyzed to generate structured documentation. Supported file types include Python, C++, Java, JavaScript, HTML, and CSS. The generated documentation is presented in a clean and organized format, making it easy to explore and understand your code.
 
 The website uses AI-powered analysis to generate descriptions for code snippets, providing more detailed explanations of the code logic and structure, making it easier to understand.
 
