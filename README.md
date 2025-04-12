@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+# About This Website
+This website is a code documentation generator designed for educational purposes. It allows users to upload code files, which are then parsed to generate structured documentation. Supported file types include Python, C++, Java, JavaScript, HTML, and CSS. The generated documentation is presented in a clean and organized format, making it easy to explore and understand your code.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The website uses AI-powered analysis to generate descriptions for code snippets, providing more detailed explanations of the code logic and structure, making it easier to understand.
 
-## Available Scripts
+Additionally, this tool supports batch processing of code for enhanced workflow, enabling users to generate documentation in real time. Users can download their documentation in both HTML and PDF formats.
 
-In the project directory, you can run:
+# Disclaimer
+### Educational Use Only: 
+This website is intended for educational purposes only. It is designed to help users learn about code documentation and to improve their understanding of different programming languages and their structures.
 
-### `npm start`
+### Data Collection and Usage: 
+By using this website, you acknowledge and consent that any code uploaded and the resulting documentation (including HTML and PDF files) may be stored on our servers. The data will solely be used to improve the website’s functionality, performance, and user experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Privacy Assurance: 
+We do not use your data for any other purposes, and we will not share your data with third parties. Your uploaded code and generated documents are strictly used to enhance the services provided by this website.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Consent to Data Collection: 
+By uploading code and using the website, you agree to the collection and usage of your data as described above. If you do not consent to this data collection, please refrain from using the website.
