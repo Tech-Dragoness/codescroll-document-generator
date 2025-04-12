@@ -5,6 +5,10 @@ The website uses AI-powered analysis to generate descriptions for code snippets,
 
 Additionally, this tool supports batch processing of code for enhanced workflow, enabling users to generate documentation in real time. Users can download their documentation in both HTML and PDF formats.
 
+## License
+
+This project is licensed under the **Custom Educational License**. See the full [LICENSE](./LICENSE) file for more details.
+
 # Disclaimer
 ### Educational Use Only: 
 This website is intended for educational purposes only. It is designed to help users learn about code documentation and to improve their understanding of different programming languages and their structures.
