@@ -50,6 +50,7 @@ export default function App() {
       // Step 2: Sending batches to AI
       setLoadingStage("📡 Sending batches to AI...");
       setProgressPercent(60);
+      setAiProgressPercent(0); // Start AI bar at 0%
 
       // 🌟 Get a unique generation ID from backend
       const idRes = await fetch(`${API_BASE}/generate-id`);
@@ -114,13 +115,10 @@ export default function App() {
 
         if (status.startsWith("generating:")) {
           const percent = parseInt(status.split(":")[1]);
-          setAiLoadingStage("📡 Generating AI descriptions...");
           setAiProgressPercent(percent);
         } else if (status === "done") {
           setAiProgressPercent(100);
-          setAiLoadingStage("🎉 Finished! Opening docs...");
           clearInterval(interval);
-          setTimeout(() => setAiProgressPercent(null), 500); // Hide AI bar
         } else if (status === "cancelled") {
           clearInterval(interval);
           setIsLoading(false);
@@ -350,30 +348,4 @@ export default function App() {
 
               <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-3">
                 <div
-                  className="h-full bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 transition-all duration-500"
-                  style={{ width: `${progressPercent}%` }}
-                ></div>
-              </div>
-
-              {aiProgressPercent !== null && (
-                <>
-                  <p className="font-bold text-lg text-blue-700 mb-2">{aiLoadingStage}</p>
-                  <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-3">
-                    <div
-                      className="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-500"
-                      style={{ width: `${aiProgressPercent}%` }}
-                    ></div>
-                  </div>
-                </>
-              )}
-
-              <p className="text-sm text-gray-600 font-mono">
-                Please sit tight while the documentation fairies do their thing 🧙‍♂️✨
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+                  className="
