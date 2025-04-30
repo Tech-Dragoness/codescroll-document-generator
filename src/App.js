@@ -48,7 +48,7 @@ export default function App() {
       await new Promise((resolve) => setTimeout(resolve, 500)); // Small pause for animation effect
 
       // Step 2: Sending batches to AI
-      setLoadingStage("📡 Sending batches to AI...");
+      setLoadingStage("Sending batches to AI...");
       setProgressPercent(60);
       setAiProgressPercent(0); // Start AI bar at 0%
 
@@ -115,7 +115,7 @@ export default function App() {
 
         if (status.startsWith("generating:")) {
           const percent = parseInt(status.split(":")[1]);
-          setLoadingStage("📡 Generating AI descriptions...");
+          setLoadingStage("Generating AI descriptions...");
           setAiProgressPercent(percent);
         } else if (status === "done") {
           setAiProgressPercent(100);
