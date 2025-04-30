@@ -231,15 +231,16 @@ def js_parser(path, generation_id=None, status=None, flags=None, batch_size=5):
     control_flows = { "if": [], "for": [], "while": [], "switch": [], "try": [] }
     description_targets = []
 
-    for match in re.finditer(r'\bif\s*\((.*?)\)', content):
-        condition = match.group(1)
+    for match in re.finditer(r'\bif\s*\(', content):
+        start = match.end() - 1
+        condition = extract_condition_block(content, start)
         lineno = content[:match.start()].count('\n') + 1
         control_flows["if"].append({
             "condition": condition,
             "lineno": lineno,
             "description": None
         })
-        snippets_to_describe.append(match.group(0))
+        snippets_to_describe.append(f"if ({condition}) {{ ... }}")
         types_to_describe.append("if statement")
         description_targets.append(("if", len(control_flows["if"]) - 1))
 
