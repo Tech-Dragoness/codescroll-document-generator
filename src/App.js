@@ -50,7 +50,7 @@ export default function App() {
       // Step 2: Sending batches to AI
       setLoadingStage("Sending batches to AI...");
       setProgressPercent(60);
-      setAiProgressPercent(0); // Start AI bar at 0%
+      setAiProgressPercent(1); // Start AI bar at 1%
 
       // 🌟 Get a unique generation ID from backend
       const idRes = await fetch(`${API_BASE}/generate-id`);
