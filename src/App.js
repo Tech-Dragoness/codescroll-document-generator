@@ -85,7 +85,7 @@ export default function App() {
       setLoadingStage("✨ Finalizing and rendering docs...");
       setProgressPercent(90);
 
-      await new Promise((resolve) => setTimeout(resolve, 400)); // Optional pause for dramatic effect
+      await new Promise((resolve) => setTimeout(resolve, 400)); // Optional pause for animation effect
 
       setProgressPercent(100);
       setIsLoading(false);
@@ -115,10 +115,13 @@ export default function App() {
 
         if (status.startsWith("generating:")) {
           const percent = parseInt(status.split(":")[1]);
+          setLoadingStage("📡 Generating AI descriptions...");
           setAiProgressPercent(percent);
         } else if (status === "done") {
           setAiProgressPercent(100);
+          setLoadingStage("🎉 Finished! Opening docs...");
           clearInterval(interval);
+          setTimeout(() => setIsLoading(false), 500);
         } else if (status === "cancelled") {
           clearInterval(interval);
           setIsLoading(false);
@@ -348,4 +351,30 @@ export default function App() {
 
               <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-3">
                 <div
-                  className="
+                  className="h-full bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 transition-all duration-500"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+
+              {aiProgressPercent !== null && (
+                <>
+                  <p className="font-bold text-lg text-blue-700 mb-2">{aiProgressPercent}%</p>
+                  <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-3">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-500"
+                      style={{ width: `${aiProgressPercent}%` }}
+                    ></div>
+                  </div>
+                </>
+              )}
+
+              <p className="text-sm text-gray-600 font-mono">
+                Please sit tight while the documentation fairies do their thing 🧙‍♂️✨
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
