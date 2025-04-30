@@ -13,6 +13,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStage, setLoadingStage] = useState("Preparing magic...");
   const [progressPercent, setProgressPercent] = useState(0);
+  const [aiProgressPercent, setAiProgressPercent] = useState(null); // Track AI bar, null when hidden
+  const [aiLoadingStage, setAiLoadingStage] = useState(""); // AI bar label
   const [generationId, setGenerationId] = useState(null); // 🪄 Track current generation task
   const emojiList = ["🧚‍♀️", "🐉", "📜", "✨", "🪄", "🌸", "📦", "⚙️", "🧠"];
   const [currentEmoji, setCurrentEmoji] = useState(emojiList[0]);
@@ -25,6 +27,7 @@ export default function App() {
     // Start truly at 0%
     setProgressPercent(0);
     setLoadingStage("🧃 Preparing to process...");
+    setAiProgressPercent(null); // Hide AI bar
 
     await new Promise((resolve) => setTimeout(resolve, 300));
 
@@ -67,6 +70,7 @@ export default function App() {
       if (!response.ok || !result.success) {
         setIsLoading(false);
         setProgressPercent(0);
+        setAiProgressPercent(null);
 
         if (result?.error === "Generation cancelled by user") {
           alert("❌ You cancelled the generation.");
@@ -84,6 +88,7 @@ export default function App() {
 
       setProgressPercent(100);
       setIsLoading(false);
+      setAiProgressPercent(null);
 
       const filenameParam = encodeURIComponent(files[0].name);
       const docURL = `${API_BASE}${result.htmlPath}?filename=${filenameParam}`;
@@ -92,6 +97,7 @@ export default function App() {
     } catch (err) {
       console.error("Upload failed:", err);
       setIsLoading(false);
+      setAiProgressPercent(null);
     }
     setGenerationId(null);
     setProgressPercent(0);
@@ -108,16 +114,17 @@ export default function App() {
 
         if (status.startsWith("generating:")) {
           const percent = parseInt(status.split(":")[1]);
-          setLoadingStage("📡 Generating AI descriptions...");
-          setProgressPercent(percent);
+          setAiLoadingStage("📡 Generating AI descriptions...");
+          setAiProgressPercent(percent);
         } else if (status === "done") {
-          setProgressPercent(100);
-          setLoadingStage("🎉 Finished! Opening docs...");
+          setAiProgressPercent(100);
+          setAiLoadingStage("🎉 Finished! Opening docs...");
           clearInterval(interval);
-          setTimeout(() => setIsLoading(false), 500);
+          setTimeout(() => setAiProgressPercent(null), 500); // Hide AI bar
         } else if (status === "cancelled") {
           clearInterval(interval);
           setIsLoading(false);
+          setAiProgressPercent(null);
           alert("❌ Generation was cancelled.");
         }
       } catch (err) {
@@ -330,6 +337,7 @@ export default function App() {
                       body: JSON.stringify({ generation_id: generationId })
                     });
                   }
+                  setAiProgressPercent(null); // Hide AI bar on cancel
                 }}
               >
                 ×
@@ -346,6 +354,18 @@ export default function App() {
                   style={{ width: `${progressPercent}%` }}
                 ></div>
               </div>
+
+              {aiProgressPercent !== null && (
+                <>
+                  <p className="font-bold text-lg text-blue-700 mb-2">{aiLoadingStage}</p>
+                  <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden mb-3">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-500"
+                      style={{ width: `${aiProgressPercent}%` }}
+                    ></div>
+                  </div>
+                </>
+              )}
 
               <p className="text-sm text-gray-600 font-mono">
                 Please sit tight while the documentation fairies do their thing 🧙‍♂️✨
